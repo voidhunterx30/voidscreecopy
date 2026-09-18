@@ -1,0 +1,6 @@
+﻿{
+  "Version": "3.0.0",
+  "PackageUrl": "https://github.com/voidhunterx30/voidscreecopy/releases/download/v3.0.0/voidscreecopy-installer.exe",
+  "Notes": "Complete auto-update system: progress bar, SHA-256 verification, skip version, remind later. Camera fix. .NET 9.0.",
+  "Sha256": "7fb4f92a22d2539f5a5ac12ebf350cc48b48b56d63d24d89359a9e8c5ca5c8ad"
+}
