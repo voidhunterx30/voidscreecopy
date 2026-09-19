@@ -1,5 +1,5 @@
 ﻿{
-    "sha256":  "A14D779870811BCAF8914C0799E0ACD675EEFB6DE4BE3C0B2E1D94D3CC583A3D",
+    "sha256":  "4DAAEDC589973905E10EC13DEC0504CAB65E76C0DAC062F1E75D88AFC2353742",
     "packageUrl":  "https://github.com/voidhunterx30/voidscreecopy/releases/download/v3.3.0/voidscreecopy-installer.exe",
     "version":  "3.3.0",
     "notes":  "v3.3.0 - Login system with admin user management. Access Denied page with custom reasons."

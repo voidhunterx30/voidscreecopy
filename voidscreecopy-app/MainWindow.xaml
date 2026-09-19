@@ -805,7 +805,8 @@
                     </Grid>
                 </Border>
             </Grid>
-﻿            <!-- AUTH OVERLAY: Login Page -->
+
+            <!-- AUTH OVERLAY: Login Page -->
             <Grid x:Name="LoginPage" Grid.RowSpan="2" Visibility="Visible" Background="{DynamicResource WindowBg}">
                 <Border Background="{DynamicResource WindowBg}" Opacity="0.92"/>
                 <Border Background="{DynamicResource CardBg}" CornerRadius="14" BorderBrush="{DynamicResource BorderLight}" BorderThickness="1"

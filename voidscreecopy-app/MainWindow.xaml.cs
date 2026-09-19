@@ -1248,7 +1248,7 @@ public partial class MainWindow : Window
         {
             Email = u.Email,
             StatusText = u.Enabled ? "Active" : "Disabled",
-            StatusColor = u.Enabled ? "Green" : "Red"
+            StatusColor = u.Enabled ? Brushes.Green : Brushes.Red
         }).ToList();
         AdminUserList.ItemsSource = items;
     }
@@ -1337,7 +1337,7 @@ public class UserDisplayItem
 {
     public string Email { get; set; } = "";
     public string StatusText { get; set; } = "";
-    public string StatusColor { get; set; } = "Green";
+    public Brush StatusColor { get; set; } = Brushes.Green;
 }
 
 public static class JsonOptions
