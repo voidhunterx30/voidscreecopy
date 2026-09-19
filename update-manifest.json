@@ -1,5 +1,5 @@
 ﻿{
-    "sha256":  "03E5B5D8336B07D09564A978460DE55C4D0AB5912E26EA7FF45210327DDFF866",
+    "sha256":  "0CCDCD1E9923E0D608F25ECD6724381818D75366DE0169A94C6F5DC55DE096DE",
     "packageUrl":  "https://github.com/voidhunterx30/voidscreecopy/releases/download/v3.3.3/voidscreecopy-installer.exe",
     "version":  "3.3.3",
     "notes":  "v3.3.3 - Fixed user registration (was failing with Unauthorized). Users now saved locally. Admin can sync to GitHub."
