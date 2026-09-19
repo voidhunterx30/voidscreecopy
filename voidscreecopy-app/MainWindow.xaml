@@ -33,16 +33,30 @@
         <SolidColorBrush x:Key="ButtonPrimary" Color="#0077B6"/>
         <SolidColorBrush x:Key="ButtonSecondary" Color="#E8EDF2"/>
         <SolidColorBrush x:Key="LogBg" Color="#F8FAFC"/>
+        <SolidColorBrush x:Key="IconBgBlue" Color="#EBF5FF"/>
+        <SolidColorBrush x:Key="IconBgOrange" Color="#FFF3E6"/>
+        <SolidColorBrush x:Key="IconBgPurple" Color="#F3EEFF"/>
+        <SolidColorBrush x:Key="IconBgNeutral" Color="#F0F4F8"/>
+        <SolidColorBrush x:Key="IconBgGreen" Color="#E8F5E9"/>
+        <SolidColorBrush x:Key="StatusGreenBg" Color="#F0FDF4"/>
+        <SolidColorBrush x:Key="StatusGreenText" Color="#166534"/>
+        <SolidColorBrush x:Key="UpdateBannerBg" Color="#EBF8FF"/>
+        <SolidColorBrush x:Key="UpdateBannerBorder" Color="#B3E5FC"/>
+        <SolidColorBrush x:Key="UpdateBannerIconBg" Color="#DBEAFE"/>
+        <SolidColorBrush x:Key="ProgressBarBg" Color="#E0E0E0"/>
+        <SolidColorBrush x:Key="WindowButtonHover" Color="#E8EDF2"/>
+        <SolidColorBrush x:Key="SecondaryBtnHover" Color="#D5DDE6"/>
+        <SolidColorBrush x:Key="SecondaryBtnPressed" Color="#C2CCD6"/>
 
         <Style TargetType="TextBlock">
-            <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimary}"/>
             <Setter Property="FontFamily" Value="Segoe UI"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
         </Style>
 
         <Style TargetType="Button" x:Key="SidebarButton">
             <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="{StaticResource TextSecondary}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextSecondary}"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Padding" Value="16,14"/>
             <Setter Property="FontSize" Value="14"/>
@@ -59,7 +73,7 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="bd" Property="Background" Value="{StaticResource SidebarHover}"/>
+                                <Setter TargetName="bd" Property="Background" Value="{DynamicResource SidebarHover}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -69,7 +83,7 @@
 
         <Style TargetType="Button" x:Key="WindowButton">
             <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="{StaticResource TextMuted}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextMuted}"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Width" Value="40"/>
             <Setter Property="Height" Value="30"/>
@@ -83,7 +97,7 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="bd" Property="Background" Value="#E8EDF2"/>
+                                <Setter TargetName="bd" Property="Background" Value="{DynamicResource WindowButtonHover}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -92,7 +106,7 @@
         </Style>
 
         <Style TargetType="Button" x:Key="PrimaryButton">
-            <Setter Property="Background" Value="{StaticResource ButtonPrimary}"/>
+            <Setter Property="Background" Value="{DynamicResource ButtonPrimary}"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Padding" Value="28,12"/>
@@ -124,8 +138,8 @@
         </Style>
 
         <Style TargetType="Button" x:Key="SecondaryButton">
-            <Setter Property="Background" Value="{StaticResource ButtonSecondary}"/>
-            <Setter Property="Foreground" Value="{StaticResource TextSecondary}"/>
+            <Setter Property="Background" Value="{DynamicResource ButtonSecondary}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextSecondary}"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Padding" Value="18,10"/>
             <Setter Property="FontSize" Value="13"/>
@@ -141,10 +155,10 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="bd" Property="Background" Value="#D5DDE6"/>
+                                <Setter TargetName="bd" Property="Background" Value="{DynamicResource SecondaryBtnHover}"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="bd" Property="Background" Value="#C2CCD6"/>
+                                <Setter TargetName="bd" Property="Background" Value="{DynamicResource SecondaryBtnPressed}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -153,8 +167,8 @@
         </Style>
 
         <Style TargetType="Border" x:Key="Card">
-            <Setter Property="Background" Value="{StaticResource CardBg}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource BorderLight}"/>
+            <Setter Property="Background" Value="{DynamicResource CardBg}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BorderLight}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="CornerRadius" Value="14"/>
             <Setter Property="Padding" Value="22"/>
@@ -174,9 +188,9 @@
         </Style>
 
         <Style TargetType="TextBox">
-            <Setter Property="Background" Value="{StaticResource LogBg}"/>
-            <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource BorderLight}"/>
+            <Setter Property="Background" Value="{DynamicResource LogBg}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimary}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BorderLight}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Padding" Value="12,10"/>
             <Setter Property="FontFamily" Value="Consolas"/>
@@ -184,16 +198,16 @@
         </Style>
 
         <Style TargetType="ListBox">
-            <Setter Property="Background" Value="{StaticResource LogBg}"/>
-            <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource BorderLight}"/>
+            <Setter Property="Background" Value="{DynamicResource LogBg}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimary}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BorderLight}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Padding" Value="4"/>
         </Style>
 
     </Window.Resources>
 
-    <Border Background="{StaticResource WindowBg}" CornerRadius="12" BorderBrush="{StaticResource BorderLight}" BorderThickness="1">
+    <Border Background="{DynamicResource WindowBg}" CornerRadius="12" BorderBrush="{DynamicResource BorderLight}" BorderThickness="1">
         <Border.Effect>
             <DropShadowEffect BlurRadius="20" Opacity="0.15" ShadowDepth="4" Color="#000000"/>
         </Border.Effect>
@@ -204,8 +218,8 @@
             </Grid.RowDefinitions>
 
             <!-- Title Bar -->
-            <Border Grid.Row="0" Background="{StaticResource TitleBarBg}" CornerRadius="12,12,0,0" 
-                    BorderBrush="{StaticResource BorderLight}" BorderThickness="0,0,0,1"
+            <Border Grid.Row="0" Background="{DynamicResource TitleBarBg}" CornerRadius="12,12,0,0" 
+                    BorderBrush="{DynamicResource BorderLight}" BorderThickness="0,0,0,1"
                     MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
                 <Grid Margin="16,0">
                     <Grid.ColumnDefinitions>
@@ -221,15 +235,15 @@
                                 <ImageBrush ImageSource="Assets/voidscreecopy-logo.png" Stretch="Uniform"/>
                             </Border.Background>
                         </Border>
-                        <TextBlock Text="voidscreecopy" FontSize="15" FontWeight="SemiBold" VerticalAlignment="Center" Foreground="{StaticResource TextPrimary}"/>
-                        <TextBlock x:Name="VersionText" Text=" v3.1.0" FontSize="11" Foreground="{StaticResource TextMuted}" VerticalAlignment="Center" Margin="8,0,0,0"/>
+                        <TextBlock Text="voidscreecopy" FontSize="15" FontWeight="SemiBold" VerticalAlignment="Center" Foreground="{DynamicResource TextPrimary}"/>
+                        <TextBlock x:Name="VersionText" Text=" v3.2.0" FontSize="11" Foreground="{DynamicResource TextMuted}" VerticalAlignment="Center" Margin="8,0,0,0"/>
                     </StackPanel>
 
                     <!-- Connection Status -->
-                    <Border Grid.Column="1" Background="#F0FDF4" CornerRadius="14" Padding="14,5" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Border Grid.Column="1" Background="{DynamicResource StatusGreenBg}" CornerRadius="14" Padding="14,5" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <StackPanel Orientation="Horizontal">
-                            <Border Width="8" Height="8" CornerRadius="4" Background="{StaticResource AccentGreen}" Margin="0,0,8,0" VerticalAlignment="Center"/>
-                            <TextBlock x:Name="ConnectionStatusText" Text="No devices connected" FontSize="12" FontWeight="Medium" Foreground="#166534" VerticalAlignment="Center"/>
+                            <Border Width="8" Height="8" CornerRadius="4" Background="{DynamicResource AccentGreen}" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="ConnectionStatusText" Text="No devices connected" FontSize="12" FontWeight="Medium" Foreground="{DynamicResource StatusGreenText}" VerticalAlignment="Center"/>
                         </StackPanel>
                     </Border>
 
@@ -251,8 +265,8 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Sidebar -->
-                <Border Grid.Column="0" Background="{StaticResource SidebarBg}" 
-                        BorderBrush="{StaticResource BorderLight}" BorderThickness="0,0,1,0">
+                <Border Grid.Column="0" Background="{DynamicResource SidebarBg}" 
+                        BorderBrush="{DynamicResource BorderLight}" BorderThickness="0,0,1,0">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="20"/>
@@ -268,12 +282,12 @@
                                         <ColumnDefinition Width="4"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Border x:Name="NavScreenIndicator" Grid.Column="0" Background="{StaticResource AccentBlue}" CornerRadius="2" Margin="0,4,8,4" Width="3" HorizontalAlignment="Left" Visibility="Visible"/>
+                                    <Border x:Name="NavScreenIndicator" Grid.Column="0" Background="{DynamicResource AccentBlue}" CornerRadius="2" Margin="0,4,8,4" Width="3" HorizontalAlignment="Left" Visibility="Visible"/>
                                     <StackPanel Grid.Column="1" Orientation="Horizontal">
-                                        <Border Width="36" Height="36" CornerRadius="10" Background="#EBF5FF" Margin="0,0,12,0">
-                                            <TextBlock Text="&#xE7F4;" FontFamily="Segoe MDL2 Assets" FontSize="18" Foreground="{StaticResource AccentBlue}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <Border Width="36" Height="36" CornerRadius="10" Background="{DynamicResource IconBgBlue}" Margin="0,0,12,0">
+                                            <TextBlock Text="&#xE7F4;" FontFamily="Segoe MDL2 Assets" FontSize="18" Foreground="{DynamicResource AccentBlue}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                         </Border>
-                                        <TextBlock Text="Screen" FontSize="14" FontWeight="SemiBold" VerticalAlignment="Center" Foreground="{StaticResource TextPrimary}"/>
+                                        <TextBlock Text="Screen" FontSize="14" FontWeight="SemiBold" VerticalAlignment="Center" Foreground="{DynamicResource TextPrimary}"/>
                                     </StackPanel>
                                 </Grid>
                             </Button>
@@ -285,10 +299,10 @@
                                         <ColumnDefinition Width="4"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Border x:Name="NavCameraIndicator" Grid.Column="0" Background="{StaticResource AccentOrange}" CornerRadius="2" Margin="0,4,8,4" Width="3" HorizontalAlignment="Left" Visibility="Collapsed"/>
+                                    <Border x:Name="NavCameraIndicator" Grid.Column="0" Background="{DynamicResource AccentOrange}" CornerRadius="2" Margin="0,4,8,4" Width="3" HorizontalAlignment="Left" Visibility="Collapsed"/>
                                     <StackPanel Grid.Column="1" Orientation="Horizontal">
-                                        <Border Width="36" Height="36" CornerRadius="10" Background="#FFF3E6" Margin="0,0,12,0">
-                                            <TextBlock Text="&#xE722;" FontFamily="Segoe MDL2 Assets" FontSize="18" Foreground="{StaticResource AccentOrange}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <Border Width="36" Height="36" CornerRadius="10" Background="{DynamicResource IconBgOrange}" Margin="0,0,12,0">
+                                            <TextBlock Text="&#xE722;" FontFamily="Segoe MDL2 Assets" FontSize="18" Foreground="{DynamicResource AccentOrange}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                         </Border>
                                         <TextBlock Text="Camera" FontSize="14" FontWeight="SemiBold" VerticalAlignment="Center" Foreground="{StaticResource TextSecondary}"/>
                                     </StackPanel>
@@ -302,10 +316,10 @@
                                         <ColumnDefinition Width="4"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Border x:Name="NavTvIndicator" Grid.Column="0" Background="{StaticResource AccentPurple}" CornerRadius="2" Margin="0,4,8,4" Width="3" HorizontalAlignment="Left" Visibility="Collapsed"/>
+                                    <Border x:Name="NavTvIndicator" Grid.Column="0" Background="{DynamicResource AccentPurple}" CornerRadius="2" Margin="0,4,8,4" Width="3" HorizontalAlignment="Left" Visibility="Collapsed"/>
                                     <StackPanel Grid.Column="1" Orientation="Horizontal">
-                                        <Border Width="36" Height="36" CornerRadius="10" Background="#F3EEFF" Margin="0,0,12,0">
-                                            <TextBlock Text="&#xE7F0;" FontFamily="Segoe MDL2 Assets" FontSize="18" Foreground="{StaticResource AccentPurple}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <Border Width="36" Height="36" CornerRadius="10" Background="{DynamicResource IconBgPurple}" Margin="0,0,12,0">
+                                            <TextBlock Text="&#xE7F0;" FontFamily="Segoe MDL2 Assets" FontSize="18" Foreground="{DynamicResource AccentPurple}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                         </Border>
                                         <TextBlock Text="TV" FontSize="14" FontWeight="SemiBold" VerticalAlignment="Center" Foreground="{StaticResource TextSecondary}"/>
                                     </StackPanel>
@@ -319,10 +333,10 @@
                                         <ColumnDefinition Width="4"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Border x:Name="NavSettingsIndicator" Grid.Column="0" Background="{StaticResource TextMuted}" CornerRadius="2" Margin="0,4,8,4" Width="3" HorizontalAlignment="Left" Visibility="Collapsed"/>
+                                    <Border x:Name="NavSettingsIndicator" Grid.Column="0" Background="{DynamicResource TextMuted}" CornerRadius="2" Margin="0,4,8,4" Width="3" HorizontalAlignment="Left" Visibility="Collapsed"/>
                                     <StackPanel Grid.Column="1" Orientation="Horizontal">
-                                        <Border Width="36" Height="36" CornerRadius="10" Background="#F0F4F8" Margin="0,0,12,0">
-                                            <TextBlock Text="&#xE713;" FontFamily="Segoe MDL2 Assets" FontSize="18" Foreground="{StaticResource TextMuted}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <Border Width="36" Height="36" CornerRadius="10" Background="{DynamicResource IconBgNeutral}" Margin="0,0,12,0">
+                                            <TextBlock Text="&#xE713;" FontFamily="Segoe MDL2 Assets" FontSize="18" Foreground="{DynamicResource TextMuted}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                         </Border>
                                         <TextBlock Text="Settings" FontSize="14" FontWeight="SemiBold" VerticalAlignment="Center" Foreground="{StaticResource TextSecondary}"/>
                                     </StackPanel>
@@ -344,7 +358,7 @@
                 </Border>
 
                 <!-- Main Content Area -->
-                <Grid Grid.Column="1" Background="{StaticResource MainBg}">
+                <Grid Grid.Column="1" Background="{DynamicResource MainBg}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
@@ -353,8 +367,8 @@
                     <!-- Content Header -->
                     <Border Grid.Row="0" Padding="26,18,26,14">
                         <StackPanel>
-                            <TextBlock x:Name="PageTitle" Text="Screen Mirroring" FontSize="22" FontWeight="Bold" Foreground="{StaticResource TextPrimary}"/>
-                            <TextBlock x:Name="PageSubtitle" Text="Share your Android device screen to OBS" Foreground="{StaticResource TextMuted}" FontSize="13" Margin="0,4,0,0"/>
+                            <TextBlock x:Name="PageTitle" Text="Screen Mirroring" FontSize="22" FontWeight="Bold" Foreground="{DynamicResource TextPrimary}"/>
+                            <TextBlock x:Name="PageSubtitle" Text="Share your Android device screen to OBS" Foreground="{DynamicResource TextMuted}" FontSize="13" Margin="0,4,0,0"/>
                         </StackPanel>
                     </Border>
 
@@ -371,8 +385,8 @@
                             <Border Grid.Row="0" Style="{StaticResource Card}">
                                 <StackPanel>
                                     <StackPanel Orientation="Horizontal" Margin="0,0,0,14">
-                                        <Border Width="32" Height="32" CornerRadius="8" Background="#EBF5FF" Margin="0,0,10,0">
-                                            <TextBlock Text="&#xE787;" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{StaticResource AccentBlue}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <Border Width="32" Height="32" CornerRadius="8" Background="{DynamicResource IconBgBlue}" Margin="0,0,10,0">
+                                            <TextBlock Text="&#xE787;" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{DynamicResource AccentBlue}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                         </Border>
                                         <TextBlock Text="Device Setup" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center"/>
                                     </StackPanel>
@@ -406,10 +420,10 @@
                                             <ComboBox x:Name="CameraQualityCombo" SelectionChanged="CameraQualityCombo_SelectionChanged" FontSize="13"/>
                                         </StackPanel>
                                     </Grid>
-                                    <Border x:Name="QualityWarning" Background="#FFF3E6" CornerRadius="6" Padding="10,8" Margin="0,8,0,0" Visibility="Collapsed">
+                                    <Border x:Name="QualityWarning" Background="{DynamicResource IconBgOrange}" CornerRadius="6" Padding="10,8" Margin="0,8,0,0" Visibility="Collapsed">
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="&#xE7BA;" FontFamily="Segoe MDL2 Assets" FontSize="12" Foreground="{StaticResource AccentOrange}" Margin="0,0,8,0" VerticalAlignment="Center"/>
-                                            <TextBlock x:Name="QualityWarningText" Foreground="{StaticResource AccentOrange}" FontSize="12" FontWeight="Medium" VerticalAlignment="Center"/>
+                                            <TextBlock Text="&#xE7BA;" FontFamily="Segoe MDL2 Assets" FontSize="12" Foreground="{DynamicResource AccentOrange}" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                            <TextBlock x:Name="QualityWarningText" Foreground="{DynamicResource AccentOrange}" FontSize="12" FontWeight="Medium" VerticalAlignment="Center"/>
                                         </StackPanel>
                                     </Border>
                                 </StackPanel>
@@ -420,21 +434,21 @@
                                 <StackPanel>
                                     <Grid Margin="0,0,0,12">
                                         <StackPanel Orientation="Horizontal">
-                                            <Border Width="32" Height="32" CornerRadius="8" Background="#F0F4F8" Margin="0,0,10,0">
-                                                <TextBlock Text="&#xE787;" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{StaticResource TextMuted}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            <Border Width="32" Height="32" CornerRadius="8" Background="{DynamicResource IconBgNeutral}" Margin="0,0,10,0">
+                                                <TextBlock Text="&#xE787;" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{DynamicResource TextMuted}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                             </Border>
                                             <TextBlock Text="Connected Devices" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center"/>
                                         </StackPanel>
                                         <Button x:Name="RefreshButton" Content="Refresh" Style="{StaticResource SecondaryButton}" 
                                                 Click="RefreshButton_Click" HorizontalAlignment="Right" Padding="14,6" MinHeight="32"/>
                                     </Grid>
-                                    <Border Background="{StaticResource LogBg}" CornerRadius="10" BorderBrush="{StaticResource BorderLight}" BorderThickness="1" MinHeight="120">
+                                    <Border Background="{DynamicResource LogBg}" CornerRadius="10" BorderBrush="{DynamicResource BorderLight}" BorderThickness="1" MinHeight="120">
                                         <ListBox x:Name="DeviceList" DisplayMemberPath="DisplayName" Background="Transparent" BorderThickness="0"/>
                                     </Border>
                                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                                        <TextBlock Text="&#xE783;" FontFamily="Segoe MDL2 Assets" FontSize="11" Foreground="{StaticResource TextMuted}" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                                        <TextBlock Text="&#xE783;" FontFamily="Segoe MDL2 Assets" FontSize="11" Foreground="{DynamicResource TextMuted}" Margin="0,0,6,0" VerticalAlignment="Center"/>
                                         <TextBlock Text="Both devices must show status 'device'. Unauthorized? Tap Allow on your phone." 
-                                                   Foreground="{StaticResource TextMuted}" FontSize="11" VerticalAlignment="Center"/>
+                                                   Foreground="{DynamicResource TextMuted}" FontSize="11" VerticalAlignment="Center"/>
                                     </StackPanel>
                                 </StackPanel>
                             </Border>
@@ -466,8 +480,8 @@
                             <Border Grid.Row="0" Style="{StaticResource Card}">
                                 <StackPanel>
                                     <StackPanel Orientation="Horizontal" Margin="0,0,0,14">
-                                        <Border Width="32" Height="32" CornerRadius="8" Background="#FFF3E6" Margin="0,0,10,0">
-                                            <TextBlock Text="&#xE722;" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{StaticResource AccentOrange}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <Border Width="32" Height="32" CornerRadius="8" Background="{DynamicResource IconBgOrange}" Margin="0,0,10,0">
+                                            <TextBlock Text="&#xE722;" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{DynamicResource AccentOrange}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                         </Border>
                                         <TextBlock Text="Camera Settings" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center"/>
                                     </StackPanel>
@@ -488,11 +502,11 @@
                                             <ComboBox x:Name="CameraFacingCombo" FontSize="13"/>
                                         </StackPanel>
                                     </Grid>
-                                    <Border Background="#F0F4F8" CornerRadius="6" Padding="10,8" Margin="0,10,0,0">
+                                    <Border Background="{DynamicResource IconBgNeutral}" CornerRadius="6" Padding="10,8" Margin="0,10,0,0">
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="&#xE783;" FontFamily="Segoe MDL2 Assets" FontSize="11" Foreground="{StaticResource TextMuted}" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                            <TextBlock Text="&#xE783;" FontFamily="Segoe MDL2 Assets" FontSize="11" Foreground="{DynamicResource TextMuted}" Margin="0,0,8,0" VerticalAlignment="Center"/>
                                             <TextBlock x:Name="CameraInfoText" Text="Camera mirroring requires Android 12+ on the device." 
-                                                       Foreground="{StaticResource TextMuted}" FontSize="12" VerticalAlignment="Center"/>
+                                                       Foreground="{DynamicResource TextMuted}" FontSize="12" VerticalAlignment="Center"/>
                                         </StackPanel>
                                     </Border>
                                 </StackPanel>
@@ -502,13 +516,13 @@
                                 <StackPanel>
                                     <Grid Margin="0,0,0,12">
                                         <StackPanel Orientation="Horizontal">
-                                            <Border Width="32" Height="32" CornerRadius="8" Background="#F0F4F8" Margin="0,0,10,0">
-                                                <TextBlock Text="&#xE787;" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{StaticResource TextMuted}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            <Border Width="32" Height="32" CornerRadius="8" Background="{DynamicResource IconBgNeutral}" Margin="0,0,10,0">
+                                                <TextBlock Text="&#xE787;" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{DynamicResource TextMuted}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                             </Border>
                                             <TextBlock Text="Connected Devices" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center"/>
                                         </StackPanel>
                                     </Grid>
-                                    <Border Background="{StaticResource LogBg}" CornerRadius="10" BorderBrush="{StaticResource BorderLight}" BorderThickness="1" MinHeight="100">
+                                    <Border Background="{DynamicResource LogBg}" CornerRadius="10" BorderBrush="{DynamicResource BorderLight}" BorderThickness="1" MinHeight="100">
                                         <ListBox x:Name="DeviceList2" DisplayMemberPath="DisplayName" Background="Transparent" BorderThickness="0"/>
                                     </Border>
                                 </StackPanel>
@@ -542,8 +556,8 @@
                                 <StackPanel>
                                     <Grid Margin="0,0,0,10">
                                         <StackPanel Orientation="Horizontal">
-                                            <Border Width="32" Height="32" CornerRadius="8" Background="#F3EEFF" Margin="0,0,10,0">
-                                                <TextBlock Text="&#xE7F0;" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{StaticResource AccentPurple}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            <Border Width="32" Height="32" CornerRadius="8" Background="{DynamicResource IconBgPurple}" Margin="0,0,10,0">
+                                                <TextBlock Text="&#xE7F0;" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{DynamicResource AccentPurple}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                             </Border>
                                             <TextBlock Text="Wi-Fi TV Connection" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center"/>
                                         </StackPanel>
@@ -551,14 +565,14 @@
                                                 Click="ScanTvButton_Click" HorizontalAlignment="Right" Padding="14,6" MinHeight="32"/>
                                     </Grid>
                                     <TextBlock x:Name="TvHelpText" Text="Scan for Android TV devices on your Wi-Fi network. Enable Developer Options and Network/Wireless Debugging on your TV." 
-                                               Foreground="{StaticResource TextMuted}" FontSize="12" TextWrapping="Wrap"/>
+                                               Foreground="{DynamicResource TextMuted}" FontSize="12" TextWrapping="Wrap"/>
                                 </StackPanel>
                             </Border>
 
                             <Border Grid.Row="1" Style="{StaticResource Card}">
                                 <StackPanel>
                                     <TextBlock Text="Found TVs" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,10"/>
-                                    <Border Background="{StaticResource LogBg}" CornerRadius="10" BorderBrush="{StaticResource BorderLight}" BorderThickness="1" MinHeight="120">
+                                    <Border Background="{DynamicResource LogBg}" CornerRadius="10" BorderBrush="{DynamicResource BorderLight}" BorderThickness="1" MinHeight="120">
                                         <ListBox x:Name="TvList" DisplayMemberPath="DisplayName" Background="Transparent" BorderThickness="0"/>
                                     </Border>
                                 </StackPanel>
@@ -567,13 +581,13 @@
                             <Border Grid.Row="2" Style="{StaticResource Card}">
                                 <StackPanel>
                                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                                        <Border Width="32" Height="32" CornerRadius="8" Background="#E8F5E9" Margin="0,0,10,0">
-                                            <TextBlock Text="&#xE7F4;" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{StaticResource AccentGreen}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <Border Width="32" Height="32" CornerRadius="8" Background="{DynamicResource IconBgGreen}" Margin="0,0,10,0">
+                                            <TextBlock Text="&#xE7F4;" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{DynamicResource AccentGreen}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                         </Border>
                                         <TextBlock Text="Chromecast (No ADB needed)" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center"/>
                                     </StackPanel>
                                     <TextBlock Text="Use Chrome browser to cast your PC screen to the TV. No Developer Options required." 
-                                               Foreground="{StaticResource TextMuted}" FontSize="12" Margin="0,0,0,12" TextWrapping="Wrap"/>
+                                               Foreground="{DynamicResource TextMuted}" FontSize="12" Margin="0,0,0,12" TextWrapping="Wrap"/>
                                     <Button x:Name="OpenCastButton" Content="Open Chrome Cast" Style="{StaticResource SecondaryButton}" 
                                             Click="OpenCastButton_Click" HorizontalAlignment="Left"/>
                                 </StackPanel>
@@ -601,8 +615,8 @@
                                     <Border Style="{StaticResource Card}">
                                         <StackPanel>
                                             <StackPanel Orientation="Horizontal" Margin="0,0,0,14">
-                                                <Border Width="32" Height="32" CornerRadius="8" Background="#F0F4F8" Margin="0,0,10,0">
-                                                    <TextBlock Text="&#xE793;" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{StaticResource TextMuted}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                <Border Width="32" Height="32" CornerRadius="8" Background="{DynamicResource IconBgNeutral}" Margin="0,0,10,0">
+                                                    <TextBlock Text="&#xE793;" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{DynamicResource TextMuted}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                                 </Border>
                                                 <TextBlock Text="Appearance" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center"/>
                                             </StackPanel>
@@ -613,7 +627,7 @@
                                                 </Grid.ColumnDefinitions>
                                                 <StackPanel Grid.Column="0">
                                                     <TextBlock Text="Theme" FontSize="12" FontWeight="Medium" Foreground="{StaticResource TextSecondary}"/>
-                                                    <TextBlock Text="Switch between light and dark mode" Foreground="{StaticResource TextMuted}" FontSize="11" Margin="0,2,0,0"/>
+                                                    <TextBlock Text="Switch between light and dark mode" Foreground="{DynamicResource TextMuted}" FontSize="11" Margin="0,2,0,0"/>
                                                 </StackPanel>
                                                 <Button x:Name="ThemeToggleButton" Grid.Column="1" Style="{StaticResource SecondaryButton}" 
                                                         Click="ThemeToggleButton_Click" Padding="16,8" MinWidth="100">
@@ -629,8 +643,8 @@
                                     <Border Style="{StaticResource Card}">
                                         <StackPanel>
                                             <StackPanel Orientation="Horizontal" Margin="0,0,0,14">
-                                                <Border Width="32" Height="32" CornerRadius="8" Background="#F0F4F8" Margin="0,0,10,0">
-                                                    <TextBlock Text="&#xE713;" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{StaticResource TextMuted}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                <Border Width="32" Height="32" CornerRadius="8" Background="{DynamicResource IconBgNeutral}" Margin="0,0,10,0">
+                                                    <TextBlock Text="&#xE713;" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{DynamicResource TextMuted}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                                 </Border>
                                                 <TextBlock Text="Application" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center"/>
                                             </StackPanel>
@@ -641,12 +655,12 @@
                                                 </Grid.ColumnDefinitions>
                                                 <StackPanel Grid.Column="0">
                                                     <TextBlock Text="Current Version" FontSize="12" FontWeight="Medium" Foreground="{StaticResource TextSecondary}"/>
-                                                    <TextBlock x:Name="SettingsVersionText" Text="3.0.0" FontSize="16" FontWeight="Bold" Foreground="{StaticResource TextPrimary}" Margin="0,4,0,0"/>
+                                                    <TextBlock x:Name="SettingsVersionText" Text="3.2.0" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource TextPrimary}" Margin="0,4,0,0"/>
                                                 </StackPanel>
-                                                <Border Grid.Column="1" Background="#F0FDF4" CornerRadius="8" Padding="12,6" VerticalAlignment="Center">
+                                                <Border Grid.Column="1" Background="{DynamicResource StatusGreenBg}" CornerRadius="8" Padding="12,6" VerticalAlignment="Center">
                                                     <StackPanel Orientation="Horizontal">
-                                                        <Border Width="8" Height="8" CornerRadius="4" Background="{StaticResource AccentGreen}" Margin="0,0,8,0"/>
-                                                        <TextBlock Text="Up to date" Foreground="#166534" FontSize="12" FontWeight="SemiBold"/>
+                                                        <Border Width="8" Height="8" CornerRadius="4" Background="{DynamicResource AccentGreen}" Margin="0,0,8,0"/>
+                                                        <TextBlock Text="Up to date" Foreground="{DynamicResource StatusGreenText}" FontSize="12" FontWeight="SemiBold"/>
                                                     </StackPanel>
                                                 </Border>
                                             </Grid>
@@ -656,13 +670,13 @@
                                     <Border Style="{StaticResource Card}">
                                         <StackPanel>
                                             <StackPanel Orientation="Horizontal" Margin="0,0,0,14">
-                                                <Border Width="32" Height="32" CornerRadius="8" Background="#EBF5FF" Margin="0,0,10,0">
-                                                    <TextBlock Text="&#xE895;" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{StaticResource AccentBlue}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                <Border Width="32" Height="32" CornerRadius="8" Background="{DynamicResource IconBgBlue}" Margin="0,0,10,0">
+                                                    <TextBlock Text="&#xE895;" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{DynamicResource AccentBlue}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                                 </Border>
                                                 <TextBlock Text="Auto-Update" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center"/>
                                             </StackPanel>
                                             <TextBlock Text="When the app starts, it checks for new versions from the configured update server." 
-                                                       Foreground="{StaticResource TextMuted}" FontSize="12" Margin="0,0,0,14" TextWrapping="Wrap"/>
+                                                       Foreground="{DynamicResource TextMuted}" FontSize="12" Margin="0,0,0,14" TextWrapping="Wrap"/>
                                             <TextBlock Text="Update Manifest URL" FontSize="12" FontWeight="Medium" Foreground="{StaticResource TextSecondary}" Margin="0,0,0,6"/>
                                             <TextBox x:Name="ManifestUrlBox" IsReadOnly="True" FontSize="11"/>
                                             <Grid Margin="0,14,0,0">
@@ -674,7 +688,7 @@
                                                 <Button x:Name="CheckUpdateButton" Grid.Column="0" Content="Check for Updates" 
                                                         Style="{StaticResource SecondaryButton}" Click="CheckUpdateButton_Click" HorizontalAlignment="Left"/>
                                                 <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
-                                                    <Border Width="8" Height="8" CornerRadius="4" Background="{StaticResource AccentGreen}" Margin="0,0,8,0"/>
+                                                    <Border Width="8" Height="8" CornerRadius="4" Background="{DynamicResource AccentGreen}" Margin="0,0,8,0"/>
                                                     <TextBlock x:Name="UpdateStatusText" Text="Up to date" FontSize="12" FontWeight="Medium" Foreground="{StaticResource TextSecondary}"/>
                                                 </StackPanel>
                                             </Grid>
@@ -682,17 +696,17 @@
                                     </Border>
 
                                     <!-- Update Banner -->
-                                    <Border x:Name="UpdateBanner" Style="{StaticResource Card}" Background="#EBF8FF" BorderBrush="#B3E5FC" Visibility="Collapsed">
+                                    <Border x:Name="UpdateBanner" Style="{StaticResource Card}" Background="{DynamicResource UpdateBannerBg}" BorderBrush="{DynamicResource UpdateBannerBorder}" Visibility="Collapsed">
                                         <StackPanel>
                                             <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
-                                                <Border Width="32" Height="32" CornerRadius="8" Background="#DBEAFE" Margin="0,0,10,0">
-                                                    <TextBlock Text="&#xE895;" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{StaticResource AccentBlue}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                <Border Width="32" Height="32" CornerRadius="8" Background="{DynamicResource UpdateBannerIconBg}" Margin="0,0,10,0">
+                                                    <TextBlock Text="&#xE895;" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{DynamicResource AccentBlue}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                                 </Border>
-                                                <TextBlock x:Name="UpdateTitleText" Text="Update Available" FontSize="16" FontWeight="Bold" Foreground="{StaticResource AccentBlue}" VerticalAlignment="Center"/>
+                                                <TextBlock x:Name="UpdateTitleText" Text="Update Available" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource AccentBlue}" VerticalAlignment="Center"/>
                                             </StackPanel>
                                             <TextBlock x:Name="UpdateNotesText" Foreground="{StaticResource TextSecondary}" FontSize="12" Margin="0,0,0,12" TextWrapping="Wrap"/>
-                                            <ProgressBar x:Name="UpdateProgressBar" Height="6" Minimum="0" Maximum="100" Background="#E0E0E0" Foreground="{StaticResource AccentBlue}" Visibility="Collapsed" Margin="0,0,0,8"/>
-                                            <TextBlock x:Name="UpdateProgressText" Foreground="{StaticResource TextMuted}" FontSize="11" Margin="0,0,0,10" Visibility="Collapsed"/>
+                                            <ProgressBar x:Name="UpdateProgressBar" Height="6" Minimum="0" Maximum="100" Background="{DynamicResource ProgressBarBg}" Foreground="{DynamicResource AccentBlue}" Visibility="Collapsed" Margin="0,0,0,8"/>
+                                            <TextBlock x:Name="UpdateProgressText" Foreground="{DynamicResource TextMuted}" FontSize="11" Margin="0,0,0,10" Visibility="Collapsed"/>
                                             <WrapPanel>
                                                 <Button x:Name="UpdateNowButton" Content="Update Now" Style="{StaticResource PrimaryButton}" 
                                                         Click="UpdateNowButton_Click" Margin="0,0,8,0" Padding="20,8"/>
@@ -707,15 +721,15 @@
                                     <Border Style="{StaticResource Card}">
                                         <StackPanel>
                                             <StackPanel Orientation="Horizontal" Margin="0,0,0,14">
-                                                <Border Width="32" Height="32" CornerRadius="8" Background="#F0F4F8" Margin="0,0,10,0">
-                                                    <TextBlock Text="&#xE946;" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{StaticResource TextMuted}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                <Border Width="32" Height="32" CornerRadius="8" Background="{DynamicResource IconBgNeutral}" Margin="0,0,10,0">
+                                                    <TextBlock Text="&#xE946;" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{DynamicResource TextMuted}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                                 </Border>
                                                 <TextBlock Text="About" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center"/>
                                             </StackPanel>
                                             <TextBlock Text="voidscreecopy is a low-latency Android screen, camera, and TV sharing controller for OBS." 
                                                        Foreground="{StaticResource TextSecondary}" FontSize="13" TextWrapping="Wrap" LineHeight="20"/>
                                             <TextBlock Text="Uses scrcpy 3.3.4 for device mirroring. Supports USB and Wi-Fi connections." 
-                                                       Foreground="{StaticResource TextMuted}" FontSize="12" Margin="0,8,0,0"/>
+                                                       Foreground="{DynamicResource TextMuted}" FontSize="12" Margin="0,8,0,0"/>
                                         </StackPanel>
                                     </Border>
                                 </StackPanel>
@@ -725,8 +739,8 @@
                 </Grid>
 
                 <!-- Right Panel -->
-                <Border Grid.Column="2" Background="{StaticResource PanelBg}" 
-                        BorderBrush="{StaticResource BorderLight}" BorderThickness="1,0,0,0">
+                <Border Grid.Column="2" Background="{DynamicResource PanelBg}" 
+                        BorderBrush="{DynamicResource BorderLight}" BorderThickness="1,0,0,0">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -739,22 +753,22 @@
                                 <Border Style="{StaticResource Card}">
                                     <StackPanel>
                                         <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
-                                            <Border Width="28" Height="28" CornerRadius="6" Background="#EBF5FF" Margin="0,0,10,0">
-                                                <TextBlock Text="&#xE7F4;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource AccentBlue}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            <Border Width="28" Height="28" CornerRadius="6" Background="{DynamicResource IconBgBlue}" Margin="0,0,10,0">
+                                                <TextBlock Text="&#xE7F4;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{DynamicResource AccentBlue}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                             </Border>
                                             <TextBlock Text="OBS Window Capture" FontSize="15" FontWeight="SemiBold" VerticalAlignment="Center"/>
                                         </StackPanel>
-                                        <TextBlock Text="Add Window Capture in OBS and select:" Foreground="{StaticResource TextMuted}" FontSize="12" Margin="0,0,0,12"/>
-                                        <Border Background="#EBF5FF" CornerRadius="8" Padding="14,11" Margin="0,0,0,8">
+                                        <TextBlock Text="Add Window Capture in OBS and select:" Foreground="{DynamicResource TextMuted}" FontSize="12" Margin="0,0,0,12"/>
+                                        <Border Background="{DynamicResource IconBgBlue}" CornerRadius="8" Padding="14,11" Margin="0,0,0,8">
                                             <StackPanel Orientation="Horizontal">
-                                                <Border Width="8" Height="8" CornerRadius="4" Background="{StaticResource AccentBlue}" Margin="0,0,10,0" VerticalAlignment="Center"/>
-                                                <TextBlock Text="OBS_TAB_SCREEN" FontFamily="Consolas" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource AccentBlue}"/>
+                                                <Border Width="8" Height="8" CornerRadius="4" Background="{DynamicResource AccentBlue}" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                                                <TextBlock Text="OBS_TAB_SCREEN" FontFamily="Consolas" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource AccentBlue}"/>
                                             </StackPanel>
                                         </Border>
-                                        <Border Background="#FFF3E6" CornerRadius="8" Padding="14,11">
+                                        <Border Background="{DynamicResource IconBgOrange}" CornerRadius="8" Padding="14,11">
                                             <StackPanel Orientation="Horizontal">
-                                                <Border Width="8" Height="8" CornerRadius="4" Background="{StaticResource AccentOrange}" Margin="0,0,10,0" VerticalAlignment="Center"/>
-                                                <TextBlock Text="OBS_MOBILE_CAMERA" FontFamily="Consolas" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource AccentOrange}"/>
+                                                <Border Width="8" Height="8" CornerRadius="4" Background="{DynamicResource AccentOrange}" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                                                <TextBlock Text="OBS_MOBILE_CAMERA" FontFamily="Consolas" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource AccentOrange}"/>
                                             </StackPanel>
                                         </Border>
                                     </StackPanel>
@@ -764,12 +778,12 @@
                                 <Border Style="{StaticResource Card}">
                                     <StackPanel>
                                         <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                                            <Border Width="28" Height="28" CornerRadius="6" Background="#F0F4F8" Margin="0,0,10,0">
-                                                <TextBlock Text="&#xE7BA;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource TextMuted}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            <Border Width="28" Height="28" CornerRadius="6" Background="{DynamicResource IconBgNeutral}" Margin="0,0,10,0">
+                                                <TextBlock Text="&#xE7BA;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{DynamicResource TextMuted}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                             </Border>
                                             <TextBlock Text="Activity Log" FontSize="15" FontWeight="SemiBold" VerticalAlignment="Center"/>
                                         </StackPanel>
-                                        <Border Background="{StaticResource LogBg}" CornerRadius="8" BorderBrush="{StaticResource BorderLight}" BorderThickness="1">
+                                        <Border Background="{DynamicResource LogBg}" CornerRadius="8" BorderBrush="{DynamicResource BorderLight}" BorderThickness="1">
                                             <TextBox x:Name="LogBox" MinHeight="180" MaxHeight="350" IsReadOnly="True" 
                                                      AcceptsReturn="True" VerticalScrollBarVisibility="Auto" 
                                                      Background="Transparent" BorderThickness="0" Padding="12,10"/>
@@ -780,10 +794,10 @@
                         </ScrollViewer>
 
                         <!-- Bottom Status -->
-                        <Border Grid.Row="1" Padding="20,14" BorderBrush="{StaticResource BorderLight}" BorderThickness="0,1,0,0">
+                        <Border Grid.Row="1" Padding="20,14" BorderBrush="{DynamicResource BorderLight}" BorderThickness="0,1,0,0">
                             <Grid>
                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                    <Border Width="8" Height="8" CornerRadius="4" Background="{StaticResource AccentGreen}" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                    <Border Width="8" Height="8" CornerRadius="4" Background="{DynamicResource AccentGreen}" Margin="0,0,8,0" VerticalAlignment="Center"/>
                                     <TextBlock x:Name="BottomStatusText" Text="Ready" FontSize="12" FontWeight="Medium" Foreground="{StaticResource TextSecondary}" VerticalAlignment="Center"/>
                                 </StackPanel>
                             </Grid>

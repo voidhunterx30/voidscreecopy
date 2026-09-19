@@ -1,6 +1,6 @@
 ﻿{
-  "Version": "3.1.0",
-  "PackageUrl": "https://github.com/voidhunterx30/voidscreecopy/releases/download/v3.1.0/voidscreecopy-installer.exe",
-  "Notes": "Polished release UI with dark/light mode toggle. Fixed crash on launch. Improved sidebar navigation with accent indicators.",
-  "Sha256": "0f85021ee9944600165a05887d4905403799ffb57df2112596a4c74fccde7042"
+  "Version": "3.2.0",
+  "PackageUrl": "https://github.com/voidhunterx30/voidscreecopy/releases/download/v3.2.0/voidscreecopy-installer.exe",
+  "Notes": "Dark mode fully working. All theme colors switch dynamically. Fixed version text in Settings. 30+ new theme resources for full dark/light coverage.",
+  "Sha256": "044a420cbd6185bfe163bcd2cb8402faa4b01deafded74b823960604bb05d21b"
 }
