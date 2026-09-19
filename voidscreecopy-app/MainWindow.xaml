@@ -236,7 +236,7 @@
                             </Border.Background>
                         </Border>
                         <TextBlock Text="voidscreecopy" FontSize="15" FontWeight="SemiBold" VerticalAlignment="Center" Foreground="{DynamicResource TextPrimary}"/>
-                        <TextBlock x:Name="VersionText" Text=" v3.3.0" FontSize="11" Foreground="{DynamicResource TextMuted}" VerticalAlignment="Center" Margin="8,0,0,0"/>
+                        <TextBlock x:Name="VersionText" Text=" v3.3.1" FontSize="11" Foreground="{DynamicResource TextMuted}" VerticalAlignment="Center" Margin="8,0,0,0"/>
                     </StackPanel>
 
                     <!-- Connection Status -->
@@ -338,7 +338,24 @@
                                         <Border Width="36" Height="36" CornerRadius="10" Background="{DynamicResource IconBgNeutral}" Margin="0,0,12,0">
                                             <TextBlock Text="&#xE713;" FontFamily="Segoe MDL2 Assets" FontSize="18" Foreground="{DynamicResource TextMuted}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                         </Border>
-                                        <TextBlock Text="Settings" FontSize="14" FontWeight="SemiBold" VerticalAlignment="Center" Foreground="{StaticResource TextSecondary}"/>
+                                        <TextBlock Text="Settings" FontSize="14" FontWeight="SemiBold" VerticalAlignment="Center" Foreground="{DynamicResource TextSecondary}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Button>
+
+                            <!-- Admin Tab (admin only) -->
+                            <Button x:Name="NavAdmin" Style="{StaticResource SidebarButton}" Click="NavAdmin_Click" Visibility="Collapsed">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="4"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border x:Name="NavAdminIndicator" Grid.Column="0" Background="{DynamicResource AccentPurple}" CornerRadius="2" Margin="0,4,8,4" Width="3" HorizontalAlignment="Left" Visibility="Collapsed"/>
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                        <Border Width="36" Height="36" CornerRadius="10" Background="{DynamicResource IconBgPurple}" Margin="0,0,12,0">
+                                            <TextBlock Text="&#xE77B;" FontFamily="Segoe MDL2 Assets" FontSize="18" Foreground="{DynamicResource AccentPurple}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                        <TextBlock Text="Admin" FontSize="14" FontWeight="SemiBold" VerticalAlignment="Center" Foreground="{DynamicResource TextSecondary}"/>
                                     </StackPanel>
                                 </Grid>
                             </Button>
@@ -655,7 +672,7 @@
                                                 </Grid.ColumnDefinitions>
                                                 <StackPanel Grid.Column="0">
                                                     <TextBlock Text="Current Version" FontSize="12" FontWeight="Medium" Foreground="{StaticResource TextSecondary}"/>
-                                                    <TextBlock x:Name="SettingsVersionText" Text="3.3.0" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource TextPrimary}" Margin="0,4,0,0"/>
+                                                    <TextBlock x:Name="SettingsVersionText" Text="3.3.1" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource TextPrimary}" Margin="0,4,0,0"/>
                                                 </StackPanel>
                                                 <Border Grid.Column="1" Background="{DynamicResource StatusGreenBg}" CornerRadius="8" Padding="12,6" VerticalAlignment="Center">
                                                     <StackPanel Orientation="Horizontal">
@@ -822,33 +839,91 @@
                             </Border.Background>
                         </Border>
                         <!-- Title -->
-                        <TextBlock Text="Welcome back" FontSize="22" FontWeight="Bold" Foreground="{DynamicResource TextPrimary}" HorizontalAlignment="Center"/>
-                        <TextBlock Text="Sign in to use voidscreecopy" FontSize="13" Foreground="{DynamicResource TextMuted}" HorizontalAlignment="Center" Margin="0,4,0,22"/>
+                        <TextBlock x:Name="LoginTitle" Text="Welcome back" FontSize="22" FontWeight="Bold" Foreground="{DynamicResource TextPrimary}" HorizontalAlignment="Center"/>
+                        <TextBlock x:Name="LoginSubtitle" Text="Sign in to use voidscreecopy" FontSize="13" Foreground="{DynamicResource TextMuted}" HorizontalAlignment="Center" Margin="0,4,0,22"/>
 
-                        <!-- Email -->
-                        <TextBlock Text="Email" FontSize="12" FontWeight="Medium" Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,6"/>
-                        <TextBox x:Name="LoginEmail" FontSize="13" Padding="12,10" Margin="0,0,0,14" FontFamily="Segoe UI"/>
+                        <!-- Login Form -->
+                        <StackPanel x:Name="LoginForm">
+                            <!-- Email -->
+                            <TextBlock Text="Email" FontSize="12" FontWeight="Medium" Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,6"/>
+                            <TextBox x:Name="LoginEmail" FontSize="13" Padding="12,10" Margin="0,0,0,14" FontFamily="Segoe UI"/>
 
-                        <!-- Password -->
-                        <TextBlock Text="Password" FontSize="12" FontWeight="Medium" Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,6"/>
-                        <PasswordBox x:Name="LoginPassword" FontSize="13" Padding="12,10" Margin="0,0,0,6"/>
+                            <!-- Password -->
+                            <TextBlock Text="Password" FontSize="12" FontWeight="Medium" Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,6"/>
+                            <PasswordBox x:Name="LoginPassword" FontSize="13" Padding="12,10" Margin="0,0,0,6"/>
 
-                        <!-- Error -->
-                        <TextBlock x:Name="LoginError" Foreground="{DynamicResource AccentRed}" FontSize="12" FontWeight="Medium"
-                                   TextWrapping="Wrap" Margin="0,4,0,0" Visibility="Collapsed" HorizontalAlignment="Center" TextAlignment="Center"/>
+                            <!-- Error -->
+                            <TextBlock x:Name="LoginError" Foreground="{DynamicResource AccentRed}" FontSize="12" FontWeight="Medium"
+                                       TextWrapping="Wrap" Margin="0,4,0,0" Visibility="Collapsed" HorizontalAlignment="Center" TextAlignment="Center"/>
 
-                        <!-- Login Button -->
-                        <Button x:Name="LoginButton" Content="Sign In" Style="{StaticResource PrimaryButton}"
-                                Click="LoginButton_Click" HorizontalAlignment="Stretch" Margin="0,16,0,0" MinHeight="46" FontSize="15"/>
+                            <!-- Login Button -->
+                            <Button x:Name="LoginButton" Content="Sign In" Style="{StaticResource PrimaryButton}"
+                                    Click="LoginButton_Click" HorizontalAlignment="Stretch" Margin="0,16,0,0" MinHeight="46" FontSize="15"/>
 
-                        <!-- Loading indicator -->
-                        <StackPanel x:Name="LoginLoading" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,14,0,0" Visibility="Collapsed">
-                            <Border Width="18" Height="18" CornerRadius="9" BorderThickness="2" BorderBrush="{DynamicResource AccentBlue}" Margin="0,0,10,0">
-                                <Border.RenderTransform>
-                                    <RotateTransform x:Name="LoginSpinner" Angle="0"/>
-                                </Border.RenderTransform>
-                            </Border>
-                            <TextBlock Text="Signing in..." FontSize="12" Foreground="{DynamicResource TextMuted}" VerticalAlignment="Center"/>
+                            <!-- Loading indicator -->
+                            <StackPanel x:Name="LoginLoading" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,14,0,0" Visibility="Collapsed">
+                                <Border Width="18" Height="18" CornerRadius="9" BorderThickness="2" BorderBrush="{DynamicResource AccentBlue}" Margin="0,0,10,0">
+                                    <Border.RenderTransform>
+                                        <RotateTransform x:Name="LoginSpinner" Angle="0"/>
+                                    </Border.RenderTransform>
+                                </Border>
+                                <TextBlock Text="Signing in..." FontSize="12" Foreground="{DynamicResource TextMuted}" VerticalAlignment="Center"/>
+                            </StackPanel>
+
+                            <!-- Create Account Link -->
+                            <TextBlock FontSize="12" Foreground="{DynamicResource TextMuted}" HorizontalAlignment="Center" Margin="0,16,0,0">
+                                <Run Text="Don't have an account?"/>
+                            </TextBlock>
+                            <Button Style="{StaticResource SecondaryButton}" Click="ShowCreateAccount_Click"
+                                    HorizontalAlignment="Center" Padding="20,8" Margin="0,6,0,0">
+                                <TextBlock Text="Create Account" FontSize="12" FontWeight="SemiBold" Foreground="{DynamicResource AccentBlue}"/>
+                            </Button>
+                        </StackPanel>
+
+                        <!-- Create Account Form (hidden by default) -->
+                        <StackPanel x:Name="CreateAccountForm" Visibility="Collapsed">
+                            <!-- Name -->
+                            <TextBlock Text="Full Name" FontSize="12" FontWeight="Medium" Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,6"/>
+                            <TextBox x:Name="RegisterNameBox" FontSize="13" Padding="12,10" Margin="0,0,0,14" FontFamily="Segoe UI"/>
+
+                            <!-- Email -->
+                            <TextBlock Text="Email" FontSize="12" FontWeight="Medium" Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,6"/>
+                            <TextBox x:Name="RegisterEmail" FontSize="13" Padding="12,10" Margin="0,0,0,14" FontFamily="Segoe UI"/>
+
+                            <!-- Password -->
+                            <TextBlock Text="Password" FontSize="12" FontWeight="Medium" Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,6"/>
+                            <PasswordBox x:Name="RegisterPassword" FontSize="13" Padding="12,10" Margin="0,0,0,14"/>
+
+                            <!-- Error -->
+                            <TextBlock x:Name="RegisterError" Foreground="{DynamicResource AccentRed}" FontSize="12" FontWeight="Medium"
+                                       TextWrapping="Wrap" Margin="0,4,0,0" Visibility="Collapsed" HorizontalAlignment="Center" TextAlignment="Center"/>
+
+                            <!-- Success -->
+                            <TextBlock x:Name="RegisterSuccess" Foreground="{DynamicResource AccentGreen}" FontSize="12" FontWeight="Medium"
+                                       TextWrapping="Wrap" Margin="0,4,0,0" Visibility="Collapsed" HorizontalAlignment="Center" TextAlignment="Center"/>
+
+                            <!-- Register Button -->
+                            <Button x:Name="RegisterButton" Content="Create Account" Style="{StaticResource PrimaryButton}"
+                                    Click="CreateAccount_Click" HorizontalAlignment="Stretch" Margin="0,16,0,0" MinHeight="46" FontSize="15"/>
+
+                            <!-- Loading indicator -->
+                            <StackPanel x:Name="RegisterLoading" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,14,0,0" Visibility="Collapsed">
+                                <Border Width="18" Height="18" CornerRadius="9" BorderThickness="2" BorderBrush="{DynamicResource AccentBlue}" Margin="0,0,10,0">
+                                    <Border.RenderTransform>
+                                        <RotateTransform Angle="0"/>
+                                    </Border.RenderTransform>
+                                </Border>
+                                <TextBlock Text="Creating account..." FontSize="12" Foreground="{DynamicResource TextMuted}" VerticalAlignment="Center"/>
+                            </StackPanel>
+
+                            <!-- Back to Login Link -->
+                            <TextBlock FontSize="12" Foreground="{DynamicResource TextMuted}" HorizontalAlignment="Center" Margin="0,16,0,0">
+                                <Run Text="Already have an account?"/>
+                            </TextBlock>
+                            <Button Style="{StaticResource SecondaryButton}" Click="ShowLogin_Click"
+                                    HorizontalAlignment="Center" Padding="20,8" Margin="0,6,0,0">
+                                <TextBlock Text="Sign In" FontSize="12" FontWeight="SemiBold" Foreground="{DynamicResource AccentBlue}"/>
+                            </Button>
                         </StackPanel>
                     </StackPanel>
                 </Border>
@@ -915,13 +990,22 @@
                                 <TextBlock Text="User Management" FontSize="20" FontWeight="Bold" VerticalAlignment="Center"
                                            Foreground="{DynamicResource TextPrimary}"/>
                             </StackPanel>
-                            <Button Style="{StaticResource SecondaryButton}" Click="AdminSignOut_Click"
-                                    HorizontalAlignment="Right" Padding="18,8" VerticalAlignment="Center">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="&#xE7E8;" FontFamily="Segoe MDL2 Assets" FontSize="12" Margin="0,0,8,0" VerticalAlignment="Center"/>
-                                    <TextBlock Text="Sign Out" FontSize="13" VerticalAlignment="Center"/>
-                                </StackPanel>
-                            </Button>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                <Button Style="{StaticResource PrimaryButton}" Click="AdminGoToApp_Click"
+                                        Padding="18,8" Margin="0,0,10,0" VerticalAlignment="Center">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="&#xE7F4;" FontFamily="Segoe MDL2 Assets" FontSize="12" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                        <TextBlock Text="Go to App" FontSize="13" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Style="{StaticResource SecondaryButton}" Click="AdminSignOut_Click"
+                                        Padding="18,8" VerticalAlignment="Center">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="&#xE7E8;" FontFamily="Segoe MDL2 Assets" FontSize="12" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                        <TextBlock Text="Sign Out" FontSize="13" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
                         </Grid>
                     </Border>
 

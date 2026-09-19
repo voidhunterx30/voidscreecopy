@@ -1,6 +1,6 @@
 ﻿{
-    "sha256":  "4DAAEDC589973905E10EC13DEC0504CAB65E76C0DAC062F1E75D88AFC2353742",
-    "packageUrl":  "https://github.com/voidhunterx30/voidscreecopy/releases/download/v3.3.0/voidscreecopy-installer.exe",
-    "version":  "3.3.0",
-    "notes":  "v3.3.0 - Login system with admin user management. Access Denied page with custom reasons."
+    "sha256":  "B2BECD610531C223FF2876789BF8666370D53FCF78853FF5F197767E9372AB09",
+    "packageUrl":  "https://github.com/voidhunterx30/voidscreecopy/releases/download/v3.3.1/voidscreecopy-installer.exe",
+    "version":  "3.3.1",
+    "notes":  "v3.3.1 - Admin can now access main app. Users can create accounts. Admin sidebar button for user management."
 }

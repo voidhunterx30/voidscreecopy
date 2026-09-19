@@ -93,6 +93,7 @@ public partial class MainWindow : Window
     private void SwitchPage(string page)
     {
         _activePage = page;
+        AdminPage.Visibility = Visibility.Collapsed;
         ScreenPage.Visibility = page == "screen" ? Visibility.Visible : Visibility.Collapsed;
         CameraPage.Visibility = page == "camera" ? Visibility.Visible : Visibility.Collapsed;
         TvPage.Visibility = page == "tv" ? Visibility.Visible : Visibility.Collapsed;
@@ -119,14 +120,8 @@ public partial class MainWindow : Window
             ["screen"] = NavScreenIndicator,
             ["camera"] = NavCameraIndicator,
             ["tv"] = NavTvIndicator,
-            ["settings"] = NavSettingsIndicator
-        };
-        var textBlocks = new Dictionary<string, TextBlock?>
-        {
-            ["screen"] = null,
-            ["camera"] = null,
-            ["tv"] = null,
-            ["settings"] = null
+            ["settings"] = NavSettingsIndicator,
+            ["admin"] = NavAdminIndicator
         };
 
         foreach (var kv in indicators)
@@ -920,9 +915,10 @@ public partial class MainWindow : Window
     private const string UsersJsonUrl = "https://raw.githubusercontent.com/voidhunterx30/voidscreecopy/main/users.json";
     private const string AdminEmail = "voidhunterx@gmail.com";
     private const string AdminPassword = "1212";
-    private string _authSettingsPath;
+    private string _authSettingsPath = "";
     private List<UserEntry> _users = new();
     private bool _adminNewUserEnabled = true;
+    private bool _isAdmin;
 
     private void InitAuth()
     {
@@ -967,14 +963,16 @@ public partial class MainWindow : Window
             if (email == AdminEmail && password == AdminPassword)
             {
                 AddLog("Admin login successful.");
-                ShowAdminPage();
+                _isAdmin = true;
                 var usersFile = await LoadUsersFromGitHubAsync();
                 if (usersFile != null)
                 {
                     _users = usersFile.Users;
-                    RefreshAdminUserList();
-                    AddLog($"Loaded {_users.Count} user(s) from GitHub.");
                 }
+                ShowAdminPage();
+                RefreshAdminUserList();
+                NavAdmin.Visibility = Visibility.Visible;
+                AddLog($"Loaded {_users.Count} user(s) from GitHub.");
                 return;
             }
 
@@ -1047,8 +1045,172 @@ public partial class MainWindow : Window
         AdminNewPassword.Text = "";
         AdminDeniedReason.Text = "";
         AdminStatusText.Text = "";
+        _isAdmin = false;
+        NavAdmin.Visibility = Visibility.Collapsed;
         ShowLoginPage();
         AddLog("Admin signed out.");
+    }
+
+    private async void AdminGoToApp_Click(object sender, RoutedEventArgs e)
+    {
+        ShowMainApp();
+        _ = Task.Run(() => CheckForUpdateAsync());
+        await RefreshDevicesAsync();
+        await ScanTvsAsync(false);
+        AddLog("Switched to main app.");
+    }
+
+    private void NavAdmin_Click(object sender, RoutedEventArgs e)
+    {
+        AdminPage.Visibility = Visibility.Visible;
+        ScreenPage.Visibility = Visibility.Collapsed;
+        CameraPage.Visibility = Visibility.Collapsed;
+        TvPage.Visibility = Visibility.Collapsed;
+        SettingsPage.Visibility = Visibility.Collapsed;
+        PageTitle.Text = "User Management";
+        PageSubtitle.Text = "Manage user access to the application";
+        RefreshAdminUserList();
+    }
+
+    private void ShowCreateAccount_Click(object sender, RoutedEventArgs e)
+    {
+        LoginForm.Visibility = Visibility.Collapsed;
+        CreateAccountForm.Visibility = Visibility.Visible;
+        LoginTitle.Text = "Create Account";
+        LoginSubtitle.Text = "Sign up to start using voidscreecopy";
+        LoginError.Visibility = Visibility.Collapsed;
+        RegisterError.Visibility = Visibility.Collapsed;
+        RegisterSuccess.Visibility = Visibility.Collapsed;
+    }
+
+    private void ShowLogin_Click(object sender, RoutedEventArgs e)
+    {
+        CreateAccountForm.Visibility = Visibility.Collapsed;
+        LoginForm.Visibility = Visibility.Visible;
+        LoginTitle.Text = "Welcome back";
+        LoginSubtitle.Text = "Sign in to use voidscreecopy";
+        RegisterError.Visibility = Visibility.Collapsed;
+        RegisterSuccess.Visibility = Visibility.Collapsed;
+        LoginError.Visibility = Visibility.Collapsed;
+    }
+
+    private async void CreateAccount_Click(object sender, RoutedEventArgs e)
+    {
+        var name = RegisterNameBox.Text.Trim();
+        var email = RegisterEmail.Text.Trim();
+        var password = RegisterPassword.Password.Trim();
+
+        if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
+        {
+            RegisterError.Text = "All fields are required.";
+            RegisterError.Visibility = Visibility.Visible;
+            RegisterSuccess.Visibility = Visibility.Collapsed;
+            return;
+        }
+
+        if (!email.Contains("@") || !email.Contains("."))
+        {
+            RegisterError.Text = "Please enter a valid email address.";
+            RegisterError.Visibility = Visibility.Visible;
+            RegisterSuccess.Visibility = Visibility.Collapsed;
+            return;
+        }
+
+        if (password.Length < 4)
+        {
+            RegisterError.Text = "Password must be at least 4 characters.";
+            RegisterError.Visibility = Visibility.Visible;
+            RegisterSuccess.Visibility = Visibility.Collapsed;
+            return;
+        }
+
+        RegisterError.Visibility = Visibility.Collapsed;
+        RegisterLoading.Visibility = Visibility.Visible;
+        RegisterButton.IsEnabled = false;
+
+        try
+        {
+            var loaded = await LoadUsersFromGitHubAsync();
+            if (loaded == null)
+            {
+                RegisterError.Text = "Could not reach server. Check your internet connection.";
+                RegisterError.Visibility = Visibility.Visible;
+                return;
+            }
+
+            if (loaded.Users.Any(u => u.Email.Equals(email, StringComparison.OrdinalIgnoreCase)))
+            {
+                RegisterError.Text = "An account with this email already exists.";
+                RegisterError.Visibility = Visibility.Visible;
+                return;
+            }
+
+            loaded.Users.Add(new UserEntry
+            {
+                Email = email,
+                Password = password,
+                Enabled = true,
+                DeniedReason = ""
+            });
+
+            var usersJson = JsonSerializer.Serialize(new UsersFile { Users = loaded.Users }, JsonOptions.Default);
+            var contentBase64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(usersJson));
+
+            using var http = new HttpClient { Timeout = TimeSpan.FromSeconds(30) };
+            http.DefaultRequestHeaders.UserAgent.ParseAdd("voidscreecopy-register/1.0");
+
+            var existingSha = "";
+            try
+            {
+                var existing = await http.GetStringAsync(
+                    "https://api.github.com/repos/voidhunterx30/voidscreecopy/contents/users.json");
+                var existingDoc = JsonDocument.Parse(existing);
+                if (existingDoc.RootElement.TryGetProperty("sha", out var shaProp))
+                    existingSha = shaProp.GetString() ?? "";
+            }
+            catch { }
+
+            var body = new
+            {
+                message = $"New user registration: {email} ({DateTime.UtcNow:yyyy-MM-dd HH:mm} UTC)",
+                content = contentBase64,
+                sha = existingSha
+            };
+
+            var bodyJson = JsonSerializer.Serialize(body, JsonOptions.Default);
+            var request = new HttpRequestMessage(HttpMethod.Put,
+                "https://api.github.com/repos/voidhunterx30/voidscreecopy/contents/users.json")
+            {
+                Content = new StringContent(bodyJson, Encoding.UTF8, "application/json")
+            };
+
+            var response = await http.SendAsync(request);
+            if (response.IsSuccessStatusCode)
+            {
+                RegisterSuccess.Text = "Account created! You can now sign in.";
+                RegisterSuccess.Visibility = Visibility.Visible;
+                RegisterError.Visibility = Visibility.Collapsed;
+                AddLog($"New account created: {email}");
+                RegisterNameBox.Text = "";
+                RegisterEmail.Text = "";
+                RegisterPassword.Password = "";
+            }
+            else
+            {
+                RegisterError.Text = $"Error: {response.StatusCode}";
+                RegisterError.Visibility = Visibility.Visible;
+            }
+        }
+        catch (Exception ex)
+        {
+            RegisterError.Text = $"Error: {ex.Message}";
+            RegisterError.Visibility = Visibility.Visible;
+        }
+        finally
+        {
+            RegisterLoading.Visibility = Visibility.Collapsed;
+            RegisterButton.IsEnabled = true;
+        }
     }
 
     private async void AdminSave_Click(object sender, RoutedEventArgs e)
