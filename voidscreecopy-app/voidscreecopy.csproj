@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Assets\voidscreecopy.ico</ApplicationIcon>
+    <AssemblyName>voidscreecopy</AssemblyName>
+    <RootNamespace>voidscreecopy</RootNamespace>
+    <Version>3.1.0</Version>
+    <FileVersion>3.1.0.0</FileVersion>
+    <AssemblyVersion>3.1.0.0</AssemblyVersion>
+    <Authors>voidscreecopy</Authors>
+    <Product>voidscreecopy</Product>
+    <Description>Low-latency Android screen, camera, and TV sharing controller for OBS.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\voidscreecopy.ico" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\voidscreecopy-logo.png" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>
