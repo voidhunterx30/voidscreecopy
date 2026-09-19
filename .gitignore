@@ -1,0 +1,8 @@
+.dotnet-sdk/
+.dotnet-home/
+.nuget-packages/
+temp/
+bin/
+obj/
+*.exe
+*.pdb

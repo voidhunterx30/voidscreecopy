@@ -1,6 +1,6 @@
 ﻿{
-  "Version": "3.2.0",
-  "PackageUrl": "https://github.com/voidhunterx30/voidscreecopy/releases/download/v3.2.0/voidscreecopy-installer.exe",
-  "Notes": "Dark mode fully working. All theme colors switch dynamically. Fixed version text in Settings. 30+ new theme resources for full dark/light coverage.",
-  "Sha256": "044a420cbd6185bfe163bcd2cb8402faa4b01deafded74b823960604bb05d21b"
+    "sha256":  "A14D779870811BCAF8914C0799E0ACD675EEFB6DE4BE3C0B2E1D94D3CC583A3D",
+    "packageUrl":  "https://github.com/voidhunterx30/voidscreecopy/releases/download/v3.3.0/voidscreecopy-installer.exe",
+    "version":  "3.3.0",
+    "notes":  "v3.3.0 - Login system with admin user management. Access Denied page with custom reasons."
 }

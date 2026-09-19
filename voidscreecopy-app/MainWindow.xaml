@@ -236,7 +236,7 @@
                             </Border.Background>
                         </Border>
                         <TextBlock Text="voidscreecopy" FontSize="15" FontWeight="SemiBold" VerticalAlignment="Center" Foreground="{DynamicResource TextPrimary}"/>
-                        <TextBlock x:Name="VersionText" Text=" v3.2.0" FontSize="11" Foreground="{DynamicResource TextMuted}" VerticalAlignment="Center" Margin="8,0,0,0"/>
+                        <TextBlock x:Name="VersionText" Text=" v3.3.0" FontSize="11" Foreground="{DynamicResource TextMuted}" VerticalAlignment="Center" Margin="8,0,0,0"/>
                     </StackPanel>
 
                     <!-- Connection Status -->
@@ -655,7 +655,7 @@
                                                 </Grid.ColumnDefinitions>
                                                 <StackPanel Grid.Column="0">
                                                     <TextBlock Text="Current Version" FontSize="12" FontWeight="Medium" Foreground="{StaticResource TextSecondary}"/>
-                                                    <TextBlock x:Name="SettingsVersionText" Text="3.2.0" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource TextPrimary}" Margin="0,4,0,0"/>
+                                                    <TextBlock x:Name="SettingsVersionText" Text="3.3.0" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource TextPrimary}" Margin="0,4,0,0"/>
                                                 </StackPanel>
                                                 <Border Grid.Column="1" Background="{DynamicResource StatusGreenBg}" CornerRadius="8" Padding="12,6" VerticalAlignment="Center">
                                                     <StackPanel Orientation="Horizontal">
@@ -805,6 +805,260 @@
                     </Grid>
                 </Border>
             </Grid>
+﻿            <!-- AUTH OVERLAY: Login Page -->
+            <Grid x:Name="LoginPage" Grid.RowSpan="2" Visibility="Visible" Background="{DynamicResource WindowBg}">
+                <Border Background="{DynamicResource WindowBg}" Opacity="0.92"/>
+                <Border Background="{DynamicResource CardBg}" CornerRadius="14" BorderBrush="{DynamicResource BorderLight}" BorderThickness="1"
+                        Width="400" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="36,32">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="20" Opacity="0.12" ShadowDepth="4" Color="#000000"/>
+                    </Border.Effect>
+                    <StackPanel HorizontalAlignment="Center">
+                        <!-- App Logo -->
+                        <Border Width="60" Height="60" CornerRadius="16" HorizontalAlignment="Center" Margin="0,0,0,18">
+                            <Border.Background>
+                                <ImageBrush ImageSource="Assets/voidscreecopy-logo.png" Stretch="Uniform"/>
+                            </Border.Background>
+                        </Border>
+                        <!-- Title -->
+                        <TextBlock Text="Welcome back" FontSize="22" FontWeight="Bold" Foreground="{DynamicResource TextPrimary}" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Sign in to use voidscreecopy" FontSize="13" Foreground="{DynamicResource TextMuted}" HorizontalAlignment="Center" Margin="0,4,0,22"/>
+
+                        <!-- Email -->
+                        <TextBlock Text="Email" FontSize="12" FontWeight="Medium" Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,6"/>
+                        <TextBox x:Name="LoginEmail" FontSize="13" Padding="12,10" Margin="0,0,0,14" FontFamily="Segoe UI"/>
+
+                        <!-- Password -->
+                        <TextBlock Text="Password" FontSize="12" FontWeight="Medium" Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,6"/>
+                        <PasswordBox x:Name="LoginPassword" FontSize="13" Padding="12,10" Margin="0,0,0,6"/>
+
+                        <!-- Error -->
+                        <TextBlock x:Name="LoginError" Foreground="{DynamicResource AccentRed}" FontSize="12" FontWeight="Medium"
+                                   TextWrapping="Wrap" Margin="0,4,0,0" Visibility="Collapsed" HorizontalAlignment="Center" TextAlignment="Center"/>
+
+                        <!-- Login Button -->
+                        <Button x:Name="LoginButton" Content="Sign In" Style="{StaticResource PrimaryButton}"
+                                Click="LoginButton_Click" HorizontalAlignment="Stretch" Margin="0,16,0,0" MinHeight="46" FontSize="15"/>
+
+                        <!-- Loading indicator -->
+                        <StackPanel x:Name="LoginLoading" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,14,0,0" Visibility="Collapsed">
+                            <Border Width="18" Height="18" CornerRadius="9" BorderThickness="2" BorderBrush="{DynamicResource AccentBlue}" Margin="0,0,10,0">
+                                <Border.RenderTransform>
+                                    <RotateTransform x:Name="LoginSpinner" Angle="0"/>
+                                </Border.RenderTransform>
+                            </Border>
+                            <TextBlock Text="Signing in..." FontSize="12" Foreground="{DynamicResource TextMuted}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- AUTH OVERLAY: Access Denied Page -->
+            <Grid x:Name="AccessDeniedPage" Grid.RowSpan="2" Visibility="Collapsed" Background="{DynamicResource WindowBg}">
+                <Border Background="{DynamicResource WindowBg}" Opacity="0.92"/>
+                <Border Background="{DynamicResource CardBg}" CornerRadius="14" BorderBrush="{DynamicResource BorderLight}" BorderThickness="1"
+                        Width="460" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="36,32">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="20" Opacity="0.12" ShadowDepth="4" Color="#000000"/>
+                    </Border.Effect>
+                    <StackPanel HorizontalAlignment="Center">
+                        <!-- Warning Icon -->
+                        <Border Width="80" Height="80" CornerRadius="40" Background="#FEE2E2" HorizontalAlignment="Center" Margin="0,0,0,20">
+                            <TextBlock Text="&#xE7BA;" FontFamily="Segoe MDL2 Assets" FontSize="32" Foreground="#DC2626"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <!-- Title -->
+                        <TextBlock Text="Access Denied" FontSize="22" FontWeight="Bold" Foreground="#DC2626" HorizontalAlignment="Center"/>
+                        <TextBlock Text="You do not have permission to use this application" FontSize="13" Foreground="{DynamicResource TextMuted}"
+                                   HorizontalAlignment="Center" Margin="0,6,0,20" TextAlignment="Center" TextWrapping="Wrap"/>
+
+                        <!-- Reason Box -->
+                        <Border x:Name="DeniedReasonBorder" Background="#FEF2F2" CornerRadius="8" Padding="14,12" Margin="0,0,0,18"
+                                BorderBrush="#FECACA" BorderThickness="1">
+                            <TextBlock x:Name="DeniedReasonText" Text="Reason not specified." FontSize="12" Foreground="#991B1B"
+                                       TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center"/>
+                        </Border>
+
+                        <!-- Contact -->
+                        <TextBlock Text="Contact the administrator for access." FontSize="12" Foreground="{DynamicResource TextMuted}"
+                                   HorizontalAlignment="Center" Margin="0,0,0,4"/>
+                        <TextBlock FontSize="12" HorizontalAlignment="Center" Margin="0,0,0,18">
+                            <Run Text="Email: " Foreground="{DynamicResource TextMuted}"/>
+                            <Run Text="voidhunterx@gmail.com" Foreground="{DynamicResource AccentBlue}" FontWeight="SemiBold"/>
+                        </TextBlock>
+
+                        <!-- Back Button -->
+                        <Button Content="Back to Sign In" Style="{StaticResource SecondaryButton}"
+                                Click="BackToLogin_Click" HorizontalAlignment="Center" Padding="28,10"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- AUTH OVERLAY: Admin Page -->
+            <Grid x:Name="AdminPage" Grid.RowSpan="2" Visibility="Collapsed" Background="{DynamicResource WindowBg}">
+                <Border Background="{DynamicResource WindowBg}" Opacity="0.96"/>
+                <Grid Margin="40,30">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Header -->
+                    <Border Grid.Row="0" Style="{StaticResource Card}" Padding="22,16" Margin="0,0,0,14">
+                        <Grid>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <Border Width="36" Height="36" CornerRadius="10" Background="{DynamicResource IconBgBlue}" Margin="0,0,12,0">
+                                    <TextBlock Text="&#xE77B;" FontFamily="Segoe MDL2 Assets" FontSize="18" Foreground="{DynamicResource AccentBlue}"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <TextBlock Text="User Management" FontSize="20" FontWeight="Bold" VerticalAlignment="Center"
+                                           Foreground="{DynamicResource TextPrimary}"/>
+                            </StackPanel>
+                            <Button Style="{StaticResource SecondaryButton}" Click="AdminSignOut_Click"
+                                    HorizontalAlignment="Right" Padding="18,8" VerticalAlignment="Center">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="&#xE7E8;" FontFamily="Segoe MDL2 Assets" FontSize="12" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Sign Out" FontSize="13" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+                    </Border>
+
+                    <!-- Content -->
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="14"/>
+                            <ColumnDefinition Width="280"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Left: User List -->
+                        <Border Grid.Column="0" Style="{StaticResource Card}" Padding="18,16">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Text="Registered Users" FontSize="15" FontWeight="SemiBold"
+                                           Foreground="{DynamicResource TextPrimary}" Margin="0,0,0,12"/>
+                                <Border Grid.Row="1" Background="{DynamicResource LogBg}" CornerRadius="10"
+                                        BorderBrush="{DynamicResource BorderLight}" BorderThickness="1">
+                                    <ListBox x:Name="AdminUserList" Background="Transparent" BorderThickness="0"
+                                             SelectionChanged="AdminUserList_SelectionChanged" Padding="4">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid Margin="4,6">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Border Grid.Column="0" Width="10" Height="10" CornerRadius="5"
+                                                            Margin="0,0,10,0" VerticalAlignment="Center">
+                                                        <Border.Background>
+                                                            <SolidColorBrush Color="{Binding StatusColor}"/>
+                                                        </Border.Background>
+                                                    </Border>
+                                                    <TextBlock Grid.Column="1" Text="{Binding Email}" FontSize="13"
+                                                               Foreground="{DynamicResource TextPrimary}" VerticalAlignment="Center"/>
+                                                    <TextBlock Grid.Column="2" Text="{Binding StatusText}" FontSize="11"
+                                                               Foreground="{DynamicResource TextMuted}" VerticalAlignment="Center" Margin="8,0,0,0"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <!-- Right: Add/Edit Form -->
+                        <Border Grid.Column="2" Style="{StaticResource Card}" Padding="18,16">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0" Text="Add User" FontSize="15" FontWeight="SemiBold"
+                                           Foreground="{DynamicResource TextPrimary}" Margin="0,0,0,14"/>
+
+                                <!-- Email -->
+                                <TextBlock Grid.Row="1" Text="Email" FontSize="12" FontWeight="Medium"
+                                           Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,4"/>
+                                <TextBox x:Name="AdminNewEmail" Grid.Row="2" FontSize="12" Padding="10,8" Margin="0,0,0,12"/>
+
+                                <!-- Password -->
+                                <TextBlock Grid.Row="3" Text="Password" FontSize="12" FontWeight="Medium"
+                                           Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,4"/>
+                                <TextBox x:Name="AdminNewPassword" Grid.Row="4" FontSize="12" Padding="10,8" Margin="0,0,0,12"/>
+
+                                <!-- Status Toggle -->
+                                <TextBlock Grid.Row="5" Text="Status" FontSize="12" FontWeight="Medium"
+                                           Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,4"/>
+                                <Grid Grid.Row="6" Margin="0,0,0,12">
+                                    <Button x:Name="AdminToggleStatus" Click="AdminToggleStatus_Click"
+                                            Style="{StaticResource SecondaryButton}" Padding="12,6" HorizontalAlignment="Left">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Border x:Name="AdminStatusDot" Width="10" Height="10" CornerRadius="5"
+                                                    Background="{DynamicResource AccentGreen}" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                            <TextBlock x:Name="AdminStatusToggleText" Text="Enabled" FontSize="12" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Button>
+                                </Grid>
+
+                                <!-- Denied Reason -->
+                                <TextBlock Grid.Row="7" Text="Denied Reason (if disabled)" FontSize="12" FontWeight="Medium"
+                                           Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,4"/>
+                                <TextBox x:Name="AdminDeniedReason" Grid.Row="8" FontSize="12" Padding="10,8" Margin="0,0,0,12"
+                                         AcceptsReturn="True" TextWrapping="Wrap" MaxHeight="80"/>
+
+                                <!-- Buttons -->
+                                <StackPanel Grid.Row="9" Margin="0,0,0,12">
+                                    <Button x:Name="AdminAddUserBtn" Content="Add User" Style="{StaticResource PrimaryButton}"
+                                            Click="AdminAddUser_Click" HorizontalAlignment="Stretch" Margin="0,0,0,8" MinHeight="38" FontSize="13"/>
+                                    <Button x:Name="AdminSaveBtn" Style="{StaticResource SecondaryButton}"
+                                            Click="AdminSave_Click" HorizontalAlignment="Stretch" MinHeight="38" FontSize="13">
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <TextBlock Text="&#xE74E;" FontFamily="Segoe MDL2 Assets" FontSize="12" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                            <TextBlock Text="Save to GitHub" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Status -->
+                                <TextBlock x:Name="AdminStatusText" Grid.Row="10" Text="" FontSize="11"
+                                           Foreground="{DynamicResource AccentGreen}" TextWrapping="Wrap" Margin="0,0,0,8"/>
+
+                                <!-- GitHub Token Section -->
+                                <Border Grid.Row="11" Background="{DynamicResource LogBg}" CornerRadius="8"
+                                        BorderBrush="{DynamicResource BorderLight}" BorderThickness="1" Padding="12,10" Margin="0,4,0,0">
+                                    <StackPanel>
+                                        <TextBlock Text="GitHub Personal Access Token (for saving)" FontSize="11" FontWeight="SemiBold"
+                                                   Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,6"/>
+                                        <TextBox x:Name="AdminGithubToken" FontSize="11" Padding="8,6" FontFamily="Consolas"
+                                                 Text="" Margin="0,0,0,6"/>
+                                        <TextBlock FontSize="10" Foreground="{DynamicResource TextMuted}" TextWrapping="Wrap">
+                                            A PAT with repo scope is required to save users.json. Create one at
+                                            <Run Text="github.com/settings/tokens" Foreground="{DynamicResource AccentBlue}"/>
+                                            with full "repo" permission.
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </Grid>
+
         </Grid>
     </Border>
 </Window>
