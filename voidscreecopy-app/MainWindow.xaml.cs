@@ -916,6 +916,7 @@ public partial class MainWindow : Window
     private const string AdminEmail = "voidhunterx@gmail.com";
     private const string AdminPassword = "1212";
     private string _authSettingsPath = "";
+    private string _localUsersPath = "";
     private List<UserEntry> _users = new();
     private bool _adminNewUserEnabled = true;
     private bool _isAdmin;
@@ -923,6 +924,7 @@ public partial class MainWindow : Window
     private void InitAuth()
     {
         _authSettingsPath = Path.Combine(_appDir, "auth-settings.json");
+        _localUsersPath = Path.Combine(_appDir, "users.json");
         LoginPage.Visibility = Visibility.Visible;
     }
 
@@ -939,6 +941,33 @@ public partial class MainWindow : Window
         {
             AddLog($"Failed to load users from GitHub: {ex.Message}");
             return null;
+        }
+    }
+
+    private UsersFile LoadUsersLocal()
+    {
+        try
+        {
+            if (File.Exists(_localUsersPath))
+            {
+                var json = File.ReadAllText(_localUsersPath);
+                return JsonSerializer.Deserialize<UsersFile>(json, JsonOptions.Default) ?? new UsersFile { Users = new() };
+            }
+        }
+        catch { }
+        return new UsersFile { Users = new() };
+    }
+
+    private void SaveUsersLocal(UsersFile usersFile)
+    {
+        try
+        {
+            var json = JsonSerializer.Serialize(usersFile, JsonOptions.Default);
+            File.WriteAllText(_localUsersPath, json);
+        }
+        catch (Exception ex)
+        {
+            AddLog($"Failed to save users locally: {ex.Message}");
         }
     }
 
@@ -964,22 +993,26 @@ public partial class MainWindow : Window
             {
                 AddLog("Admin login successful.");
                 _isAdmin = true;
-                var usersFile = await LoadUsersFromGitHubAsync();
-                if (usersFile != null)
-                {
-                    _users = usersFile.Users;
-                }
+                var localUsers = LoadUsersLocal();
+                _users = localUsers.Users;
                 ShowAdminPage();
                 RefreshAdminUserList();
                 NavAdmin.Visibility = Visibility.Visible;
-                AddLog($"Loaded {_users.Count} user(s) from GitHub.");
+                AddLog($"Loaded {_users.Count} user(s) from local file.");
                 return;
             }
 
-            var loaded = await LoadUsersFromGitHubAsync();
+            var loaded = LoadUsersLocal();
+            if (loaded == null || loaded.Users.Count == 0)
+            {
+                var remoteLoaded = await LoadUsersFromGitHubAsync();
+                if (remoteLoaded != null)
+                    loaded = remoteLoaded;
+            }
+
             if (loaded == null)
             {
-                LoginError.Text = "Could not reach server. Check your internet connection.";
+                LoginError.Text = "Could not load user data. Try again.";
                 LoginError.Visibility = Visibility.Visible;
                 return;
             }
@@ -1130,13 +1163,7 @@ public partial class MainWindow : Window
 
         try
         {
-            var loaded = await LoadUsersFromGitHubAsync();
-            if (loaded == null)
-            {
-                RegisterError.Text = "Could not reach server. Check your internet connection.";
-                RegisterError.Visibility = Visibility.Visible;
-                return;
-            }
+            var loaded = LoadUsersLocal();
 
             if (loaded.Users.Any(u => u.Email.Equals(email, StringComparison.OrdinalIgnoreCase)))
             {
@@ -1153,53 +1180,15 @@ public partial class MainWindow : Window
                 DeniedReason = ""
             });
 
-            var usersJson = JsonSerializer.Serialize(new UsersFile { Users = loaded.Users }, JsonOptions.Default);
-            var contentBase64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(usersJson));
+            SaveUsersLocal(loaded);
 
-            using var http = new HttpClient { Timeout = TimeSpan.FromSeconds(30) };
-            http.DefaultRequestHeaders.UserAgent.ParseAdd("voidscreecopy-register/1.0");
-
-            var existingSha = "";
-            try
-            {
-                var existing = await http.GetStringAsync(
-                    "https://api.github.com/repos/voidhunterx30/voidscreecopy/contents/users.json");
-                var existingDoc = JsonDocument.Parse(existing);
-                if (existingDoc.RootElement.TryGetProperty("sha", out var shaProp))
-                    existingSha = shaProp.GetString() ?? "";
-            }
-            catch { }
-
-            var body = new
-            {
-                message = $"New user registration: {email} ({DateTime.UtcNow:yyyy-MM-dd HH:mm} UTC)",
-                content = contentBase64,
-                sha = existingSha
-            };
-
-            var bodyJson = JsonSerializer.Serialize(body, JsonOptions.Default);
-            var request = new HttpRequestMessage(HttpMethod.Put,
-                "https://api.github.com/repos/voidhunterx30/voidscreecopy/contents/users.json")
-            {
-                Content = new StringContent(bodyJson, Encoding.UTF8, "application/json")
-            };
-
-            var response = await http.SendAsync(request);
-            if (response.IsSuccessStatusCode)
-            {
-                RegisterSuccess.Text = "Account created! You can now sign in.";
-                RegisterSuccess.Visibility = Visibility.Visible;
-                RegisterError.Visibility = Visibility.Collapsed;
-                AddLog($"New account created: {email}");
-                RegisterNameBox.Text = "";
-                RegisterEmail.Text = "";
-                RegisterPassword.Password = "";
-            }
-            else
-            {
-                RegisterError.Text = $"Error: {response.StatusCode}";
-                RegisterError.Visibility = Visibility.Visible;
-            }
+            RegisterSuccess.Text = "Account created! You can now sign in.";
+            RegisterSuccess.Visibility = Visibility.Visible;
+            RegisterError.Visibility = Visibility.Collapsed;
+            AddLog($"New account created: {email}");
+            RegisterNameBox.Text = "";
+            RegisterEmail.Text = "";
+            RegisterPassword.Password = "";
         }
         catch (Exception ex)
         {
@@ -1215,11 +1204,14 @@ public partial class MainWindow : Window
 
     private async void AdminSave_Click(object sender, RoutedEventArgs e)
     {
+        SaveUsersLocal(new UsersFile { Users = _users });
+        AddLog("Users saved locally.");
+
         var token = AdminGithubToken.Text.Trim();
         if (string.IsNullOrWhiteSpace(token))
         {
-            AdminStatusText.Text = "Enter a GitHub PAT first.";
-            AdminStatusText.Foreground = FindResource("AccentRed") as Brush;
+            AdminStatusText.Text = "Saved locally. Add a GitHub PAT to sync to cloud.";
+            AdminStatusText.Foreground = FindResource("AccentGreen") as Brush;
             return;
         }
 
@@ -1317,6 +1309,7 @@ public partial class MainWindow : Window
             DeniedReason = AdminDeniedReason.Text.Trim()
         });
 
+        SaveUsersLocal(new UsersFile { Users = _users });
         RefreshAdminUserList();
         AdminNewEmail.Text = "";
         AdminNewPassword.Text = "";
@@ -1366,6 +1359,7 @@ public partial class MainWindow : Window
             if (user != null)
             {
                 _users.Remove(user);
+                SaveUsersLocal(new UsersFile { Users = _users });
                 RefreshAdminUserList();
                 AdminStatusText.Text = $"User '{item.Email}' removed. Click Save to GitHub.";
                 AdminStatusText.Foreground = FindResource("AccentGreen") as Brush;
