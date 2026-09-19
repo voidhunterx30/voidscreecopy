@@ -1,6 +1,6 @@
 ﻿{
-    "sha256":  "B2BECD610531C223FF2876789BF8666370D53FCF78853FF5F197767E9372AB09",
-    "packageUrl":  "https://github.com/voidhunterx30/voidscreecopy/releases/download/v3.3.1/voidscreecopy-installer.exe",
-    "version":  "3.3.1",
-    "notes":  "v3.3.1 - Admin can now access main app. Users can create accounts. Admin sidebar button for user management."
+    "sha256":  "2A24864E1B20055651BCC54A0289ED9AD15FE3FE99F03FD21EED422164949277",
+    "packageUrl":  "https://github.com/voidhunterx30/voidscreecopy/releases/download/v3.3.2/voidscreecopy-installer.exe",
+    "version":  "3.3.2",
+    "notes":  "v3.3.2 - Fixed ComboBox text invisible in dark mode."
 }

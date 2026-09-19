@@ -181,6 +181,9 @@
         </Style>
 
         <Style TargetType="ComboBox">
+            <Setter Property="Background" Value="{DynamicResource LogBg}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimary}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BorderLight}"/>
             <Setter Property="MinHeight" Value="40"/>
             <Setter Property="Margin" Value="0,4,0,10"/>
             <Setter Property="Padding" Value="12,8"/>
@@ -672,7 +675,7 @@
                                                 </Grid.ColumnDefinitions>
                                                 <StackPanel Grid.Column="0">
                                                     <TextBlock Text="Current Version" FontSize="12" FontWeight="Medium" Foreground="{StaticResource TextSecondary}"/>
-                                                    <TextBlock x:Name="SettingsVersionText" Text="3.3.1" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource TextPrimary}" Margin="0,4,0,0"/>
+                                                    <TextBlock x:Name="SettingsVersionText" Text="3.3.2" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource TextPrimary}" Margin="0,4,0,0"/>
                                                 </StackPanel>
                                                 <Border Grid.Column="1" Background="{DynamicResource StatusGreenBg}" CornerRadius="8" Padding="12,6" VerticalAlignment="Center">
                                                     <StackPanel Orientation="Horizontal">
