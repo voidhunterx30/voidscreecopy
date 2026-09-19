@@ -1,6 +1,6 @@
 ﻿{
-    "sha256":  "2A24864E1B20055651BCC54A0289ED9AD15FE3FE99F03FD21EED422164949277",
+    "sha256":  "61F1171E2FF0637402F27AFF9969889DDEDDC4FCAC0EB9AC03E5BFF2F7CB945B",
     "packageUrl":  "https://github.com/voidhunterx30/voidscreecopy/releases/download/v3.3.2/voidscreecopy-installer.exe",
     "version":  "3.3.2",
-    "notes":  "v3.3.2 - Fixed ComboBox text invisible in dark mode."
+    "notes":  "v3.3.2 - Fixed ComboBox text invisible in dark mode. Now self-contained - no .NET installation required."
 }
