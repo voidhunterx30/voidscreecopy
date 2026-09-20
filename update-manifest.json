@@ -1,6 +1,6 @@
 ﻿{
-    "sha256":  "57F626BD532A431855924A0C5FBEE0AAB00A64777AB815DF238AC94BB2D9414D",
-    "packageUrl":  "https://github.com/voidhunterx30/voidscreecopy/releases/download/v3.3.5/voidscreecopy-installer.exe",
-    "version":  "3.3.5",
-    "notes":  "v3.3.5 - Better update diagnostics. Fixed screen+camera launching."
+    "sha256":  "FE0FA4211F8E0CE05F0CFA79E7F4E51901864F6947AA63A87B5E9DA6F23187A1",
+    "packageUrl":  "https://github.com/voidhunterx30/voidscreecopy/releases/download/v3.3.6/voidscreecopy-installer.exe",
+    "version":  "3.3.6",
+    "notes":  "v3.3.6 - Admin can now edit/disable users with a reason. Disabled users see Access Denied with the reason."
 }

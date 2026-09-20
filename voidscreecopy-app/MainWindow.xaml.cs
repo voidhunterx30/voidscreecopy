@@ -1313,15 +1313,70 @@ public partial class MainWindow : Window
 
         SaveUsersLocal(new UsersFile { Users = _users });
         RefreshAdminUserList();
+        ExitEditMode();
+        AdminStatusText.Text = $"User '{email}' added.";
+        AdminStatusText.Foreground = FindResource("AccentGreen") as Brush;
+        AddLog($"Added user: {email}");
+    }
+
+    private void AdminUpdateUser_Click(object sender, RoutedEventArgs e)
+    {
+        if (string.IsNullOrEmpty(_selectedUserEmail))
+        {
+            AdminStatusText.Text = "No user selected.";
+            AdminStatusText.Foreground = FindResource("AccentRed") as Brush;
+            return;
+        }
+
+        var user = _users.FirstOrDefault(u => u.Email == _selectedUserEmail);
+        if (user == null)
+        {
+            AdminStatusText.Text = "User not found.";
+            AdminStatusText.Foreground = FindResource("AccentRed") as Brush;
+            return;
+        }
+
+        var newPassword = AdminNewPassword.Text.Trim();
+        if (string.IsNullOrWhiteSpace(newPassword))
+        {
+            AdminStatusText.Text = "Password cannot be empty.";
+            AdminStatusText.Foreground = FindResource("AccentRed") as Brush;
+            return;
+        }
+
+        user.Password = newPassword;
+        user.Enabled = _adminNewUserEnabled;
+        user.DeniedReason = AdminDeniedReason.Text.Trim();
+
+        SaveUsersLocal(new UsersFile { Users = _users });
+        RefreshAdminUserList();
+        AdminStatusText.Text = $"User '{user.Email}' updated.";
+        AdminStatusText.Foreground = FindResource("AccentGreen") as Brush;
+        AddLog($"Updated user: {user.Email} (Enabled={user.Enabled})");
+
+        ExitEditMode();
+    }
+
+    private void AdminCancelEdit_Click(object sender, RoutedEventArgs e)
+    {
+        ExitEditMode();
+    }
+
+    private void ExitEditMode()
+    {
+        _selectedUserEmail = "";
+        AdminUserList.SelectedItem = null;
         AdminNewEmail.Text = "";
         AdminNewPassword.Text = "";
         AdminDeniedReason.Text = "";
         _adminNewUserEnabled = true;
         AdminStatusToggleText.Text = "Enabled";
         AdminStatusDot.Background = FindResource("AccentGreen") as Brush;
-        AdminStatusText.Text = $"User '{email}' added. Click Save to GitHub.";
-        AdminStatusText.Foreground = FindResource("AccentGreen") as Brush;
-        AddLog($"Added user: {email}");
+        AdminStatusText.Text = "";
+
+        AdminFormTitle.Text = "Add User";
+        AdminAddButtons.Visibility = Visibility.Visible;
+        AdminEditButtons.Visibility = Visibility.Collapsed;
     }
 
     private void AdminToggleStatus_Click(object sender, RoutedEventArgs e)
@@ -1333,6 +1388,8 @@ public partial class MainWindow : Window
             : FindResource("AccentRed") as Brush;
     }
 
+    private string _selectedUserEmail = "";
+
     private void AdminUserList_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (AdminUserList.SelectedItem is UserDisplayItem selected)
@@ -1340,6 +1397,7 @@ public partial class MainWindow : Window
             var user = _users.FirstOrDefault(u => u.Email == selected.Email);
             if (user != null)
             {
+                _selectedUserEmail = user.Email;
                 AdminNewEmail.Text = user.Email;
                 AdminNewPassword.Text = user.Password;
                 AdminDeniedReason.Text = user.DeniedReason;
@@ -1349,6 +1407,10 @@ public partial class MainWindow : Window
                     ? FindResource("AccentGreen") as Brush
                     : FindResource("AccentRed") as Brush;
                 AdminStatusText.Text = "";
+
+                AdminFormTitle.Text = $"Edit: {user.Email}";
+                AdminAddButtons.Visibility = Visibility.Collapsed;
+                AdminEditButtons.Visibility = Visibility.Visible;
             }
         }
     }
@@ -1362,8 +1424,9 @@ public partial class MainWindow : Window
             {
                 _users.Remove(user);
                 SaveUsersLocal(new UsersFile { Users = _users });
+                if (_selectedUserEmail == item.Email) ExitEditMode();
                 RefreshAdminUserList();
-                AdminStatusText.Text = $"User '{item.Email}' removed. Click Save to GitHub.";
+                AdminStatusText.Text = $"User '{item.Email}' removed.";
                 AdminStatusText.Foreground = FindResource("AccentGreen") as Brush;
                 AddLog($"Removed user: {item.Email}");
             }

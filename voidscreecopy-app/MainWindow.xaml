@@ -675,7 +675,7 @@
                                                 </Grid.ColumnDefinitions>
                                                 <StackPanel Grid.Column="0">
                                                     <TextBlock Text="Current Version" FontSize="12" FontWeight="Medium" Foreground="{StaticResource TextSecondary}"/>
-                                                    <TextBlock x:Name="SettingsVersionText" Text="3.3.5" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource TextPrimary}" Margin="0,4,0,0"/>
+                                                    <TextBlock x:Name="SettingsVersionText" Text="3.3.6" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource TextPrimary}" Margin="0,4,0,0"/>
                                                 </StackPanel>
                                                 <Border Grid.Column="1" Background="{DynamicResource StatusGreenBg}" CornerRadius="8" Padding="12,6" VerticalAlignment="Center">
                                                     <StackPanel Orientation="Horizontal">
@@ -1076,7 +1076,7 @@
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
 
-                                <TextBlock Grid.Row="0" Text="Add User" FontSize="15" FontWeight="SemiBold"
+                                <TextBlock x:Name="AdminFormTitle" Grid.Row="0" Text="Add User" FontSize="15" FontWeight="SemiBold"
                                            Foreground="{DynamicResource TextPrimary}" Margin="0,0,0,14"/>
 
                                 <!-- Email -->
@@ -1110,7 +1110,7 @@
                                          AcceptsReturn="True" TextWrapping="Wrap" MaxHeight="80"/>
 
                                 <!-- Buttons -->
-                                <StackPanel Grid.Row="9" Margin="0,0,0,12">
+                                <StackPanel x:Name="AdminAddButtons" Grid.Row="9" Margin="0,0,0,12">
                                     <Button x:Name="AdminAddUserBtn" Content="Add User" Style="{StaticResource PrimaryButton}"
                                             Click="AdminAddUser_Click" HorizontalAlignment="Stretch" Margin="0,0,0,8" MinHeight="38" FontSize="13"/>
                                     <Button x:Name="AdminSaveBtn" Style="{StaticResource SecondaryButton}"
@@ -1120,6 +1120,12 @@
                                             <TextBlock Text="Save to GitHub" VerticalAlignment="Center"/>
                                         </StackPanel>
                                     </Button>
+                                </StackPanel>
+                                <StackPanel x:Name="AdminEditButtons" Grid.Row="9" Margin="0,0,0,12" Visibility="Collapsed">
+                                    <Button x:Name="AdminUpdateUserBtn" Content="Update User" Style="{StaticResource PrimaryButton}"
+                                            Click="AdminUpdateUser_Click" HorizontalAlignment="Stretch" Margin="0,0,0,8" MinHeight="38" FontSize="13"/>
+                                    <Button x:Name="AdminCancelEditBtn" Content="Cancel" Style="{StaticResource SecondaryButton}"
+                                            Click="AdminCancelEdit_Click" HorizontalAlignment="Stretch" MinHeight="38" FontSize="13"/>
                                 </StackPanel>
 
                                 <!-- Status -->
