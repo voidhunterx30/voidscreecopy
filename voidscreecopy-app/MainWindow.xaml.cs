@@ -691,6 +691,8 @@ public partial class MainWindow : Window
         try
         {
             var settings = await UpdateSettings.LoadAsync(_settingsPath);
+            AddLog($"Update check: AutoUpdate={settings.AutoUpdate}, Skipped={settings.SkippedVersion ?? "none"}, RemindUntil={settings.RemindLaterUntil?.ToString("yyyy-MM-dd HH:mm") ?? "none"}");
+
             if (!settings.AutoUpdate || string.IsNullOrWhiteSpace(settings.ManifestUrl) || settings.ManifestUrl.Contains("YOUR_GITHUB", StringComparison.OrdinalIgnoreCase))
             {
                 Dispatcher.Invoke(() => UpdateStatusText.Text = "Update check skipped");
@@ -699,6 +701,7 @@ public partial class MainWindow : Window
 
             using var http = new HttpClient { Timeout = TimeSpan.FromSeconds(15) };
             http.DefaultRequestHeaders.UserAgent.ParseAdd("voidscreecopy-updater/3.0");
+            AddLog("Fetching update manifest...");
             var json = await http.GetStringAsync(settings.ManifestUrl);
             var manifest = JsonSerializer.Deserialize<UpdateManifest>(json, JsonOptions.Default);
             if (manifest == null || string.IsNullOrWhiteSpace(manifest.Version) || string.IsNullOrWhiteSpace(manifest.PackageUrl))
@@ -707,8 +710,9 @@ public partial class MainWindow : Window
                 return;
             }
 
-            if (!Version.TryParse(manifest.Version, out var latest)) return;
+            if (!Version.TryParse(manifest.Version, out var latest)) { AddLog($"Failed to parse version: {manifest.Version}"); return; }
             var current = CurrentVersion;
+            AddLog($"Update check: manifest v{latest}, current v{current}");
 
             if (latest <= current)
             {

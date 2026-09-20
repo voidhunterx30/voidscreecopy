@@ -1,6 +1,6 @@
 ﻿{
-    "sha256":  "0C8D1EF1DC077C35975420FB0A94FFE64BE221DD62964CDDA407D75F0603421B",
-    "packageUrl":  "https://github.com/voidhunterx30/voidscreecopy/releases/download/v3.3.4/voidscreecopy-installer.exe",
-    "version":  "3.3.4",
-    "notes":  "v3.3.4 - Fixed screen and camera not launching simultaneously. Both now start together."
+    "sha256":  "57F626BD532A431855924A0C5FBEE0AAB00A64777AB815DF238AC94BB2D9414D",
+    "packageUrl":  "https://github.com/voidhunterx30/voidscreecopy/releases/download/v3.3.5/voidscreecopy-installer.exe",
+    "version":  "3.3.5",
+    "notes":  "v3.3.5 - Better update diagnostics. Fixed screen+camera launching."
 }
