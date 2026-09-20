@@ -1,6 +1,6 @@
 ﻿; voidscreecopy v3.0.0 Professional Installer
 #define MyAppName "voidscreecopy"
-#define MyAppVersion "3.3.6"
+#define MyAppVersion "3.3.7"
 #define MyAppPublisher "voidscreecopy"
 #define MyAppURL "https://github.com/voidhunterx30/voidscreecopy"
 #define MyAppExeName "voidscreecopy.exe"
@@ -21,7 +21,7 @@ OutputDir=D:\srccopyvoid
 OutputBaseFilename=voidscreecopy-installer
 SetupIconFile=D:\srccopyvoid\voidscreecopy-app\Assets\voidscreecopy.ico
 UninstallDisplayIcon={app}\voidscreecopy.exe
-Compression=lzma2/ultra64
+Compression=lzma2/fast
 SolidCompression=yes
 WizardStyle=modern
 PrivilegesRequired=lowest
@@ -32,7 +32,7 @@ DisableProgramGroupPage=yes
 DisableReadyPage=no
 WizardImageFile=D:\srccopyvoid\voidscreecopy-app\Assets\voidscreecopy-logo.bmp
 WizardSmallImageFile=D:\srccopyvoid\voidscreecopy-app\Assets\voidscreecopy-logo.bmp
-VersionInfoVersion=3.3.6.0
+VersionInfoVersion=3.3.7.0
 VersionInfoCompany={#MyAppPublisher}
 VersionInfoProductName={#MyAppName}
 VersionInfoProductVersion={#MyAppVersion}

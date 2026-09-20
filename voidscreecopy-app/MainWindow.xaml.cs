@@ -594,9 +594,7 @@ public partial class MainWindow : Window
         {
             WorkingDirectory = _toolsDir,
             UseShellExecute = false,
-            CreateNoWindow = true,
-            RedirectStandardError = true,
-            RedirectStandardOutput = true
+            CreateNoWindow = true
         };
 
         try

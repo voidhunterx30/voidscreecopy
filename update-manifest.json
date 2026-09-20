@@ -1,6 +1,6 @@
 ﻿{
-    "sha256":  "FE0FA4211F8E0CE05F0CFA79E7F4E51901864F6947AA63A87B5E9DA6F23187A1",
-    "packageUrl":  "https://github.com/voidhunterx30/voidscreecopy/releases/download/v3.3.6/voidscreecopy-installer.exe",
-    "version":  "3.3.6",
-    "notes":  "v3.3.6 - Admin can now edit/disable users with a reason. Disabled users see Access Denied with the reason."
+    "sha256":  "2620FC227251876DA09835AE828834B34F3A3DBBF3DBB633A5BB79780C466DF3",
+    "packageUrl":  "https://github.com/voidhunterx30/voidscreecopy/releases/download/v3.3.7/voidscreecopy-installer.exe",
+    "version":  "3.3.7",
+    "notes":  "v3.3.7 - Fixed camera closing automatically after a few seconds. Removed stdout/stderr redirect that caused scrcpy pipe buffer deadlock."
 }
