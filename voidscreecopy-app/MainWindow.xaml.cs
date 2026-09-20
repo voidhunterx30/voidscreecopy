@@ -610,8 +610,7 @@ public partial class MainWindow : Window
 
             _launched.Add(process);
 
-            var stderr = await process.StandardError.ReadToEndAsync();
-            var stdout = await process.StandardOutput.ReadToEndAsync();
+            await Task.Delay(800);
 
             if (!process.HasExited)
             {
@@ -620,8 +619,7 @@ public partial class MainWindow : Window
             else
             {
                 var exitCode = process.ExitCode;
-                var errorDetail = !string.IsNullOrWhiteSpace(stderr) ? stderr : stdout;
-                AddLog($"{title} exited immediately (code {exitCode}). {errorDetail}");
+                AddLog($"{title} exited immediately (code {exitCode}).");
             }
         }
         catch (Exception ex)
